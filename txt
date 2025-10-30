@@ -1,0 +1,7 @@
+main=main page
+contestants=4cards of houses(before displaying house members)
+blue,green,red,yellow=house contestants
+round1=rules of round 1
+r1=round 1 (start and select qns)
+round2=rules of round 2
+r2=round 2 (start of buzzer round)

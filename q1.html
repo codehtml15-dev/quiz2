@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q1 - Round 1</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:"Poppins","Segoe UI",Arial,sans-serif; }
+  body { background:url("school.png") no-repeat center center/cover; min-height:100vh; display:flex; flex-direction:column; align-items:center; padding-top:120px; }
+
+  nav {
+    width:100%; background:rgba(10,42,102,0.9); padding:12px 50px; display:flex; justify-content:space-between; align-items:center; position:fixed; top:0; left:0; z-index:1000;
+  }
+  nav .logo { display:flex; align-items:center; gap:10px; }
+  nav .logo img { width:40px; }
+  nav .logo h3 { color:#fff; font-size:1.2rem; font-weight:600; }
+  nav ul { list-style:none; display:flex; gap:25px; }
+  nav ul li a { text-decoration:none; color:#fff; font-weight:500; transition:0.3s; }
+  nav ul li a:hover { color:#b3c7f7; }
+
+  .container {
+    background: rgba(225,240,255,0.95);
+    border-radius: 25px;
+    padding: 60px;
+    max-width: 900px;
+    width: 95%;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    margin-top:20px;
+    min-height:500px;
+    position:relative;
+  }
+
+  h1 { color:#0a2a66; font-size:2.3rem; margin-bottom:40px; }
+  .question-area { font-size:1.3rem; color:#333; min-height:200px; margin-bottom:40px; }
+
+  .btn {
+    padding:14px 36px;
+    font-weight:600;
+    border-radius:12px;
+    text-decoration:none;
+    transition:0.3s;
+    color:#fff;
+    background:#0a2a66;
+    box-shadow:0 6px 14px rgba(0,0,0,0.2);
+    cursor:pointer;
+    position:absolute;
+    bottom:20px;
+  }
+
+  .btn:hover { transform:scale(1.05); }
+
+  .btn.back { left:20px; background:#6b7280; }
+  .btn.back:hover { background:#4b5563; }
+
+  .btn.answer { right:20px; background:#2563eb; }
+  .btn.answer:hover { background:#1e40af; }
+
+  .answer-text {
+    display:none;
+    margin-top:20px;
+    font-size:1.2rem;
+    color:#0a2a66;
+    font-weight:500;
+  }
+
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">
+    <img src="logo.png" alt="School Logo">
+    <h3>Fluorescent Secondary</h3>
+  </div>
+  <ul>
+    <li><a href="main.html">Home</a></li>
+    <li><a href="#">Quiz</a></li>
+    <li><a href="#">Results</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+  <h1>Q1 - Round 1</h1>
+  <div class="question-area">
+    What is the capital of France?
+  </div>
+
+  <div class="answer-text" id="answer">
+    Answer: Paris
+  </div>
+
+  <button class="btn back" onclick="window.history.back()">← Back</button>
+  <button class="btn answer" onclick="showAnswer()">Show Answer</button>
+</div>
+
+<script>
+  function showAnswer(){
+    document.getElementById('answer').style.display = 'block';
+  }
+</script>
+</body>
+</html>

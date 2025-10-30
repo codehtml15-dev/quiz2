@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Round</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #3b0764, #1e1b4b, #0f172a);
+      min-height: 100vh;
+      padding-top: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #f8fafc;
+    }
+
+    nav {
+      width: 100%;
+      background: rgba(55, 48, 163, 0.9);
+      padding: 14px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: 0 0 15px rgba(147, 51, 234, 0.4);
+    }
+
+    nav .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    nav .logo img {
+      width: 40px;
+      filter: drop-shadow(0 0 8px #facc15);
+    }
+
+    nav .logo h3 {
+      color: #facc15;
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(250, 204, 21, 0.7);
+    }
+
+    h1 {
+      color: #a855f7;
+      font-size: 2.6rem;
+      font-weight: 800;
+      margin-bottom: 30px;
+      text-shadow: 0 0 15px rgba(147, 51, 234, 0.7), 0 0 8px rgba(250, 204, 21, 0.4);
+    }
+
+    .main-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      width: 90%;
+      max-width: 1200px;
+    }
+
+    /* Question Section */
+    .questions {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .question-box {
+      background: rgba(31, 41, 55, 0.9);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 18px;
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+      padding: 20px 25px;
+      transition: all 0.3s ease;
+    }
+
+    .question-box:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 35px rgba(250, 204, 21, 0.25);
+    }
+
+    .question-box h2 {
+      color: #f8fafc;
+      margin-bottom: 12px;
+      display: none;
+    }
+
+    .answer {
+      display: none;
+      font-style: italic;
+      color: #d8b4fe;
+      margin-top: 10px;
+    }
+
+    .btn {
+      background: linear-gradient(90deg, #a855f7, #facc15);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      margin-top: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(250, 204, 21, 0.6);
+    }
+
+    /* Scoreboard Section */
+    .scoreboard {
+      flex: 1;
+      background: rgba(31, 41, 55, 0.9);
+      border-radius: 18px;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      box-shadow: 0 0 25px rgba(147, 51, 234, 0.2);
+      padding: 25px;
+      text-align: center;
+      height: fit-content;
+      position: sticky;
+      top: 120px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(90deg, #a855f7, #facc15);
+      color: white;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      margin-bottom: 15px;
+    }
+
+    .back-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
+    }
+
+    .scoreboard h2 {
+      color: #facc15;
+      margin-bottom: 20px;
+      text-shadow: 0 0 8px rgba(250, 204, 21, 0.6);
+    }
+
+    .scores {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .house {
+      background: rgba(17, 24, 39, 0.8);
+      padding: 12px;
+      border-radius: 12px;
+      box-shadow: inset 0 0 8px rgba(168, 85, 247, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .house:hover {
+      transform: scale(1.03);
+    }
+
+    .house h3 {
+      color: #a855f7;
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+      text-shadow: 0 0 6px rgba(168, 85, 247, 0.4);
+    }
+
+    .score {
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: #f8fafc;
+    }
+
+    .controls button {
+      background: #a855f7;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 4px 8px;
+      margin: 2px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: 0.3s;
+    }
+
+    .controls button:hover {
+      background: #7e22ce;
+    }
+
+    @media (max-width: 900px) {
+      .main-container {
+        flex-direction: column;
+      }
+
+      .scoreboard {
+        position: relative;
+        top: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
+      <h3>Fluorescent Secondary</h3>
+    </div>
+  </nav>
+
+  <h1>🎵 Music Round</h1>
+
+  <div class="main-container">
+    <!-- Questions Section -->
+    <div class="questions" id="questionsContainer"></div>
+
+    <!-- Scoreboard -->
+    <div class="scoreboard">
+      <a href="mixedbag.html" class="back-btn">← Back</a>
+      <h2>🏆 Scoreboard</h2>
+      <div class="scores">
+        <div class="house">
+          <h3>Yellow House</h3>
+          <div class="score" id="yellowScore">0</div>
+          <div class="controls">
+            <button onclick="changeScore('Yellow', 1)">+1</button>
+            <button onclick="changeScore('Yellow', -1)">-1</button>
+          </div>
+        </div>
+        <div class="house">
+          <h3>Blue House</h3>
+          <div class="score" id="blueScore">0</div>
+          <div class="controls">
+            <button onclick="changeScore('Blue', 1)">+1</button>
+            <button onclick="changeScore('Blue', -1)">-1</button>
+          </div>
+        </div>
+        <div class="house">
+          <h3>Red House</h3>
+          <div class="score" id="redScore">0</div>
+          <div class="controls">
+            <button onclick="changeScore('Red', 1)">+1</button>
+            <button onclick="changeScore('Red', -1)">-1</button>
+          </div>
+        </div>
+        <div class="house">
+          <h3>Green House</h3>
+          <div class="score" id="greenScore">0</div>
+          <div class="controls">
+            <button onclick="changeScore('Green', 1)">+1</button>
+            <button onclick="changeScore('Green', -1)">-1</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 🎶 Music-Themed Questions
+    const questions = [
+      { q: "Which artist is known as the 'King of Pop'?", a: "Michael Jackson" },
+      { q: "Which band released the album 'Abbey Road'?", a: "The Beatles" },
+      { q: "Who is the youngest solo artist to win Album of the Year at the Grammys?", a: "Billie Eilish" },
+      { q: "What is the stage name of Stefani Joanne Angelina Germanotta?", a: "Lady Gaga" }
+    ];
+
+    const container = document.getElementById("questionsContainer");
+
+    // Generate Questions
+    questions.forEach((item, index) => {
+      const qBox = document.createElement("div");
+      qBox.classList.add("question-box");
+
+      qBox.innerHTML = `
+        <button class="btn" onclick="showQuestion('q${index}')">Show Question ${index + 1}</button>
+        <h2 id="q${index}">${item.q}</h2>
+        <button class="btn" onclick="toggleAnswer('ans${index}')">Reveal Answer</button>
+        <p id="ans${index}" class="answer">${item.a}</p>
+      `;
+
+      container.appendChild(qBox);
+    });
+
+    function showQuestion(id) {
+      document.getElementById(id).style.display = "block";
+    }
+
+    function toggleAnswer(id) {
+      const ans = document.getElementById(id);
+      ans.style.display = ans.style.display === "block" ? "none" : "block";
+    }
+
+    // Load and Save Scores
+    const scores = JSON.parse(localStorage.getItem("musicScores")) || {
+      Yellow: 0, Blue: 0, Red: 0, Green: 0
+    };
+
+    function updateScores() {
+      document.getElementById("yellowScore").textContent = scores.Yellow;
+      document.getElementById("blueScore").textContent = scores.Blue;
+      document.getElementById("redScore").textContent = scores.Red;
+      document.getElementById("greenScore").textContent = scores.Green;
+      localStorage.setItem("musicScores", JSON.stringify(scores));
+    }
+
+    function changeScore(house, val) {
+      if (scores[house] + val < 0) return;
+      scores[house] += val;
+      updateScores();
+    }
+
+    updateScores();
+  </script>
+</body>
+</html>

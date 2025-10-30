@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q7 - Round 1</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:"Poppins","Segoe UI",Arial,sans-serif; }
+body { background:url("school.png") no-repeat center center/cover; min-height:100vh; display:flex; flex-direction:column; align-items:center; padding-top:120px; }
+nav { width:100%; background:rgba(10,42,102,0.9); padding:12px 50px; display:flex; justify-content:space-between; align-items:center; position:fixed; top:0; left:0; z-index:1000;}
+nav .logo { display:flex; align-items:center; gap:10px;}
+nav .logo img { width:40px;}
+nav .logo h3 { color:#fff; font-size:1.2rem; font-weight:600;}
+nav ul { list-style:none; display:flex; gap:25px;}
+nav ul li a { text-decoration:none; color:#fff; font-weight:500; transition:0.3s;}
+nav ul li a:hover { color:#b3c7f7;}
+.container {
+    background: rgba(225,240,255,0.95);
+    border-radius: 25px;
+    padding: 60px;
+    max-width: 900px;
+    width: 95%;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    margin-top:20px;
+    min-height:500px;
+    position:relative;
+}
+h1 { color:#0a2a66; font-size:2rem; margin-bottom:20px; }
+p.subtitle { font-size:1.1rem; color:#333; margin-bottom:40px; }
+.btn { padding:14px 36px; font-weight:600; border-radius:12px; text-decoration:none; transition:0.3s; display:inline-block; font-size:1.1rem; box-shadow:0 6px 14px rgba(0,0,0,0.2); cursor:pointer; }
+.btn.back { background:#6b7280; color:#fff; position:absolute; left:20px; bottom:20px;}
+.btn.back:hover { background:#4b5563; transform:scale(1.05); }
+.btn.answer { background:#0a2a66; color:#fff; position:absolute; right:20px; bottom:20px;}
+.btn.answer:hover { background:#083070; transform:scale(1.05); }
+#answerBox { margin-top:40px; padding:20px; background:#e5e7eb; border-radius:12px; display:none; color:#0a2a66; font-weight:600;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">
+    <img src="logo.png" alt="School Logo">
+    <h3>Fluorescent Secondary</h3>
+  </div>
+  <ul>
+    <li><a href="main.html">Home</a></li>
+    <li><a href="#">Quiz</a></li>
+    <li><a href="#">Results</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+    <h1>Question 7</h1>
+    <p class="subtitle">Type your question here.</p>
+    <div id="answerBox">This is the answer to Question 7.</div>
+    <button class="btn answer" id="showAnswer">Show Answer</button>
+    <a href="r1.html" class="btn back" id="backBtn">← Back</a>
+</div>
+
+<script>
+const questionID = 'q7';
+document.getElementById('showAnswer').addEventListener('click', () => {
+    document.getElementById('answerBox').style.display = 'block';
+    localStorage.setItem(questionID,'answered');
+});
+document.getElementById('backBtn').addEventListener('click', () => {
+    localStorage.setItem(questionID,'answered');
+});
+</script>
+</body>
+</html>
