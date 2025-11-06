@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Riddle Round - Q1</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #385a85;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 30px 30px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #1f2937;
+    }
+
+    /* NAVIGATION BAR */
+    nav {
+      width: 100%;
+      background: rgba(30, 58, 138, 0.95);
+      padding: 14px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+    nav .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    nav .logo img {
+      width: 50px;
+    }
+    nav .logo h3 {
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 35px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s;
+      font-size: 1.1rem;
+    }
+    nav ul li a:hover {
+      color: #c7d2fe;
+    }
+
+    /* MAIN CONTAINER */
+    .main-wrapper {
+      display: flex;
+      width: 95%;
+      max-width: 1600px;
+      margin-top: 100px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      min-height: 800px;
+      background: rgba(240, 248, 255, 0.95);
+    }
+
+    /* RIDDLE PANEL */
+    .riddle-panel {
+      flex: 4;
+      padding: 70px 80px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .riddle-panel h1 {
+      font-size: 3.5rem;
+      color: #1e3a8a;
+      margin-bottom: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .underline {
+      width: 280px;
+      height: 5px;
+      background: #2563eb;
+      border-radius: 3px;
+      margin: 15px auto 40px;
+    }
+
+    .question {
+      font-size: 2.3rem;
+      color: #1f2937;
+      background: rgba(255, 255, 255, 0.9);
+      border: 3px solid #93c5fd;
+      border-radius: 20px;
+      padding: 50px 60px;
+      margin-bottom: 50px;
+      max-width: 1000px;
+      line-height: 1.5;
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.25);
+    }
+
+    .reveal-btn {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      border: none;
+      color: white;
+      padding: 22px 45px;
+      font-size: 1.6rem;
+      font-weight: 700;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 25px rgba(59, 130, 246, 0.4);
+    }
+
+    .reveal-btn:hover {
+      background: linear-gradient(135deg, #2563eb, #1e40af);
+      transform: scale(1.08);
+    }
+
+    .answer {
+      opacity: 0;
+      font-size: 2rem;
+      color: #1e3a8a;
+      margin-top: 40px;
+      transition: opacity 1s ease;
+      font-weight: 700;
+    }
+
+    .answer.visible {
+      opacity: 1;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      flex: 1.2;
+      background: rgba(237, 245, 252, 0.9);
+      padding: 50px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-left: 2px solid rgba(30, 58, 138, 0.3);
+      gap: 25px;
+    }
+
+    .sidebar h3 {
+      color: #1e3a8a;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .nav-btn {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      border: none;
+      color: white;
+      padding: 18px 25px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      border-radius: 12px;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+    }
+
+    .nav-btn:hover {
+      transform: scale(1.08);
+      background: linear-gradient(135deg, #2563eb, #1e3a8a);
+    }
+
+    .nav-btn.active {
+      background: linear-gradient(135deg, #1e3a8a, #172554);
+      color: #a5b4fc;
+    }
+
+    @media (max-width: 1000px) {
+      .main-wrapper {
+        flex-direction: column;
+      }
+      .sidebar {
+        border-left: none;
+        border-top: 2px solid rgba(30, 58, 138, 0.3);
+        width: 100%;
+      }
+      .question {
+        font-size: 1.6rem;
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">
+      <img src="logo.png" alt="School Logo" />
+      <h3>Fluorescent Secondary</h3>
+    </div>
+    <ul>
+      <li><a href="main.html">Home</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+      <li><a href="#">Results</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="main-wrapper">
+    <div class="riddle-panel">
+      <h1>2nd question</h1>
+      <div class="underline"></div>
+      <div class="question" id="question">
+        Q1: I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?
+      </div>
+      <button class="reveal-btn" id="revealBtn">Reveal Answer</button>
+      <div class="answer" id="answer">An Echo.</div>
+    </div>
+
+    <div class="sidebar">
+      <h3>Riddles</h3>
+      <a href="riddleq1.html" class="nav-btn active">Q1</a>
+      <a href="riddleq2.html" class="nav-btn">Q2</a>
+      <a href="riddleq3.html" class="nav-btn">Q3</a>
+      <a href="riddleq4.html" class="nav-btn">Q4</a>
+      <a href="riddleq5.html" class="nav-btn">Q5</a>
+      <a href="riddleq6.html" class="nav-btn">Q6</a>
+      <a href="riddleq7.html" class="nav-btn">Q7</a>
+      <a href="riddleq8.html" class="nav-btn">Q8</a>
+    </div>
+  </div>
+
+  <script>
+    const btn = document.getElementById("revealBtn");
+    const ans = document.getElementById("answer");
+    btn.addEventListener("click", () => {
+      ans.classList.add("visible");
+      btn.disabled = true;
+      btn.style.opacity = 0.6;
+      btn.textContent = "Answer Revealed";
+    });
+  </script>
+
+</body>
+</html>
