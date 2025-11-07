@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mixed Bag Round</title>
   <style>
     * {
@@ -12,19 +12,27 @@
       font-family: "Poppins", "Segoe UI", Arial, sans-serif;
     }
 
+    /* ✅ Background like Round 2 */
     body {
-      background: linear-gradient(135deg, #e0f7fa, #f1f8ff);
-      min-height: 100vh;
+      background-color: #385a85;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 30px 30px;
+      color: #1f2937;
       display: flex;
       flex-direction: column;
       align-items: center;
+      min-height: 100vh;
       padding-top: 100px;
+      overflow-y: auto;
     }
 
+    /* ✅ Nav bar like Round 2 */
     nav {
       width: 100%;
-      background: rgba(10, 42, 102, 0.9);
-      padding: 14px 50px;
+      background: rgba(30, 58, 138, 0.95);
+      padding: 12px 50px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -39,44 +47,67 @@
       align-items: center;
       gap: 10px;
     }
-
-    nav .logo img {
-      width: 40px;
-    }
-
+    nav .logo img { width: 40px; }
     nav .logo h3 {
       color: #fff;
       font-size: 1.2rem;
       font-weight: 600;
     }
 
-    h1 {
-      color: #0a2a66;
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 40px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #c7d2fe;
     }
 
-    /* Layout Container */
+    /* ✅ White box wrapper like before */
+    .main-wrapper {
+      width: 70%;
+      max-width: 1200px;
+      background: rgba(240, 248, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      padding: 40px 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+
+    h1 {
+      color: #1e3a8a;
+      font-size: 2.3rem;
+      font-weight: 700;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    /* ✅ Keep your grid layout */
     .grid {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 30px;
-      width: 90%;
-      max-width: 1000px;
+      width: 100%;
     }
 
     .row {
       display: flex;
       justify-content: center;
       gap: 40px;
+      flex-wrap: wrap;
     }
 
-    a {
-      text-decoration: none;
-    }
+    a { text-decoration: none; }
 
     .box {
       position: relative;
@@ -125,7 +156,7 @@
       z-index: 2;
     }
 
-    /* Backgrounds */
+    /* ✅ Background images */
     .history::before {
       background-image: url('https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1000&q=80');
     }
@@ -135,122 +166,108 @@
     }
 
     .scitech::before {
-      background-image: url('https://images.unsplash.com/photo-1581091870627-3c7a6d4d6b6d?auto=format&fit=crop&w=1000&q=80');
+      background-image: url('https://static.vecteezy.com/system/resources/previews/049/461/708/non_2x/abstract-image-of-hands-holding-a-glowing-nuclear-atom-symbolizing-science-and-technology-photo.jpeg');
     }
 
     .maths::before {
-      background-image: url('https://images.unsplash.com/photo-1529101091764-c3526daf38fe?auto=format&fit=crop&w=1000&q=80');
+      background-image: url('https://tse3.mm.bing.net/th/id/OIP.eI8iWEz6Qrhs4r7yMx9ANwHaD4?rs=1&pid=ImgDetMain&o=7&rm=3');
     }
 
     .current::before {
-      background-image: url('https://images.unsplash.com/photo-1581091870627-3c7a6d4d6b6d?auto=format&fit=crop&w=1000&q=80');
+      background-image: url('https://www.compassnewspaper.org/wp-content/uploads/2024/09/Global-Current-Affairs-A-World-View.jpg');
     }
 
     .movies::before {
-      background-image: url('https://images.unsplash.com/photo-1608889175117-9a27e66b75b5?auto=format&fit=crop&w=1000&q=80');
+      background-image: url('https://th.bing.com/th/id/OIP.OiBxINMmxXo1aDdEN5oarwHaEo?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3');
     }
 
     .music::before {
       background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1000&q=80');
     }
 
-    /* Next Round Button */
-    .next-round {
-      background: #0a2a66;
-      color: white;
-      font-size: 1.2rem;
-      font-weight: 600;
-      padding: 12px 25px;
-      border-radius: 8px;
-      text-decoration: none;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      transition: all 0.3s ease;
+    /* ✅ Navigation buttons (back & next) */
+    .bottom-nav {
       display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 8px;
+      gap: 30px;
       margin-top: 40px;
     }
 
-    .next-round:hover {
-      background: #133c91;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.4s ease;
+      color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
 
-    .arrow {
-      font-size: 1.3rem;
+    .btn.back {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
     }
 
-    @media (max-width: 800px) {
-      .row {
-        flex-direction: column;
-        align-items: center;
-      }
-      .box {
-        width: 80%;
-        height: 200px;
-      }
+    .btn.back:hover {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      transform: scale(1.05);
+    }
+
+    .btn.next {
+      background: linear-gradient(135deg, #2563eb, #1e40af);
+    }
+
+    .btn.next:hover {
+      background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
 
+  <!-- ✅ Nav -->
   <nav>
     <div class="logo">
       <img src="logo.png" alt="Logo" />
       <h3>Fluorescent Secondary</h3>
     </div>
+    <ul>
+      <li><a href="main.html">Home</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+      <li><a href="#">Results</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
   </nav>
 
-  <h1>Mixed Bag Round</h1>
+  <!-- ✅ White content box -->
+  <div class="main-wrapper">
+    <h1>Mixed Bag Round</h1>
 
-  <div class="grid">
-    <!-- Row 1 -->
-    <div class="row">
-      <a href="history.html">
-        <div class="box history"><div class="title">History</div></div>
-      </a>
-      <a href="sports.html">
-        <div class="box sports"><div class="title">Sports</div></div>
-      </a>
+    <div class="grid">
+      <div class="row">
+        <a href="history.html"><div class="box history"><div class="title">History</div></div></a>
+        <a href="sports.html"><div class="box sports"><div class="title">Sports</div></div></a>
+      </div>
+      <div class="row">
+        <a href="scienceandtechnology.html"><div class="box scitech"><div class="title">Science & Tech</div></div></a>
+        <a href="maths.html"><div class="box maths"><div class="title">Mathematics</div></div></a>
+      </div>
+      <div class="row">
+        <a href="current.html"><div class="box current"><div class="title">Current Affairs</div></div></a>
+        <a href="movies.html"><div class="box movies"><div class="title">Movies</div></div></a>
+      </div>
+      <div class="row">
+        <a href="music.html"><div class="box music"><div class="title">Music</div></div></a>
+      </div>
     </div>
 
-    <!-- Row 2 -->
-    <div class="row">
-      <a href="scienceandtechnology.html">
-        <div class="box scitech"><div class="title">Science & Tech</div></div>
-      </a>
-      <a href="maths.html">
-        <div class="box maths"><div class="title">Mathematics</div></div>
-      </a>
-    </div>
-
-    <!-- Row 3 -->
-    <div class="row">
-      <a href="current.html">
-        <div class="box current"><div class="title">Current Affairs</div></div>
-      </a>
-      <a href="movies.html">
-        <div class="box movies"><div class="title">Movies</div></div>
-      </a>
-    </div>
-
-    <!-- Centered Last Row -->
-    <div class="row">
-      <a href="music.html">
-        <div class="box music"><div class="title">Music</div></div>
-      </a>
+    <div class="bottom-nav">
+      <a href="round2rules.html" class="btn back">← Back</a>
+      <a href="round3rules.html" class="btn next">Next Round →</a>
     </div>
   </div>
-
-  <a href="nextround.html" class="next-round">
-    Next Round <span class="arrow">→</span>
-  </a>
-
-  <script src="points.js"></script>
-  <script>
-    renderScores();
-  </script>
 
 </body>
 </html>
