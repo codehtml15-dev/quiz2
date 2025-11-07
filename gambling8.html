@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gold Diamond Platinum Round</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+    }
+
+    /* Background like before */
+    body {
+      background-color: #385a85;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 30px 30px;
+      color: #1f2937;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding-top: 100px;
+      overflow-y: auto;
+    }
+
+    /* Navbar like previous */
+    nav {
+      width: 100%;
+      background: rgba(30, 58, 138, 0.95);
+      padding: 12px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    nav .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    nav .logo img { width: 40px; }
+    nav .logo h3 {
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover { color: #c7d2fe; }
+
+    /* White main box */
+    .main-wrapper {
+      width: 90%;
+      max-width: 1000px;
+      background: rgba(240, 248, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      padding: 40px 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+
+    h1 {
+      color: #1e3a8a;
+      font-size: 2.3rem;
+      font-weight: 700;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    /* Grid Layout */
+    .grid {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    a { text-decoration: none; }
+
+    .box {
+      position: relative;
+      height: 230px;
+      width: 300px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .box:hover {
+      transform: scale(1.07);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+    }
+
+    .box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.7);
+      transition: all 0.4s ease;
+      z-index: 1;
+    }
+
+    .box:hover::before {
+      filter: brightness(1);
+      transform: scale(1.1);
+    }
+
+    .title {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+      z-index: 2;
+    }
+
+    /* Gorgeous backgrounds */
+    .gold::before {
+      background-image: url('https://images.unsplash.com/photo-1602524200235-86eb24189b6c?auto=format&fit=crop&w=1000&q=80');
+    }
+
+    .diamond::before {
+      background-image: url('https://images.unsplash.com/photo-1515165562835-c4c21e0ad3d8?auto=format&fit=crop&w=1000&q=80');
+    }
+
+    .platinum::before {
+      background-image: url('https://images.unsplash.com/photo-1617957771969-0129b8c828ba?auto=format&fit=crop&w=1000&q=80');
+    }
+
+    /* Buttons */
+    .bottom-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.4s ease;
+      color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn.back {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+    }
+
+    .btn.back:hover {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      transform: scale(1.05);
+    }
+
+    .btn.next {
+      background: linear-gradient(135deg, #2563eb, #1e40af);
+    }
+
+    .btn.next:hover {
+      background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 800px) {
+      .grid {
+        flex-direction: column;
+        align-items: center;
+      }
+      .box {
+        width: 80%;
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">
+      <img src="logo.png" alt="Logo" />
+      <h3>Fluorescent Secondary</h3>
+    </div>
+    <ul>
+      <li><a href="main.html">Home</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+      <li><a href="#">Results</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- White container -->
+  <div class="main-wrapper">
+    <h1>Gold • Diamond • Platinum</h1>
+
+    <div class="grid">
+      <a href="#"><div class="box gold"><div class="title">Gold</div></div></a>
+      <a href="#"><div class="box diamond"><div class="title">Diamond</div></div></a>
+      <a href="#"><div class="box platinum"><div class="title">Platinum</div></div></a>
+    </div>
+
+    <div class="bottom-nav">
+      <a href="round3rules.html" class="btn back">← Back</a>
+      <a href="round5rules.html" class="btn next">Next Round →</a>
+    </div>
+  </div>
+</body>
+</html>
