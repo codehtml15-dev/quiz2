@@ -18,7 +18,8 @@
         linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
       background-size: 30px 30px;
-      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden; /* Prevent scrolling */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -29,7 +30,7 @@
     nav {
       width: 100%;
       background: rgba(30, 58, 138, 0.95);
-      padding: 12px 50px;
+      padding: 10px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -44,23 +45,24 @@
       gap: 10px;
     }
     nav .logo img {
-      width: 40px;
+      width: 35px;
     }
     nav .logo h3 {
       color: #fff;
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: 600;
     }
     nav ul {
       list-style: none;
       display: flex;
-      gap: 25px;
+      gap: 20px;
     }
     nav ul li a {
       text-decoration: none;
       color: #fff;
       font-weight: 500;
       transition: color 0.3s;
+      font-size: 0.95rem;
     }
     nav ul li a:hover {
       color: #c7d2fe;
@@ -69,95 +71,90 @@
     /* MAIN WRAPPER */
     .main-wrapper {
       display: flex;
-      width: 90%;
-      max-width: 1200px;
-      margin-top: 100px;
+      width: 95%;
+      max-width: 1000px;
+      height: 90vh;
+      margin-top: 70px;
       border-radius: 15px;
       overflow: hidden;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-      min-height: 700px;
-      background: rgba(240, 248, 255, 0.9);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      background: rgba(240, 248, 255, 0.95);
     }
 
     /* LEFT PANEL */
     .questions-panel {
       flex: 3;
-      padding: 40px 60px;
+      padding: 25px 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
     }
 
     .round-title {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 30px;
       text-align: center;
+      margin-bottom: 15px;
     }
 
     .round-title h1 {
-      font-size: 2.3rem;
+      font-size: 1.8rem;
       color: #1e3a8a;
       font-weight: 700;
     }
 
     .round-title h1 span {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       color: #2563eb;
-      margin-left: 10px;
     }
 
     .underline {
-      width: 220px;
-      height: 4px;
+      width: 180px;
+      height: 3px;
       background-color: #2563eb;
       border-radius: 2px;
-      margin: 10px 0 20px 0;
+      margin: 10px auto 20px;
     }
 
-    /*  IMAGE GRID */
-    .image-grid {
-      display: end;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+    .image-container {
       width: 100%;
-      max-width: 400px;
-      margin-bottom: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
     }
 
-    .image-grid img {
-      width: 100%;
+    .image-container img {
+      width: 60%;
+      max-width: 350px;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       border: 2px solid #2563eb;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
       transition: transform 0.3s ease;
     }
 
-    .image-grid img:hover {
-      transform: scale(1.05);
+    .image-container img:hover {
+      transform: scale(1.03);
     }
 
     .question-text {
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       color: #1e3a8a;
       font-weight: 600;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
-    /* SHOW ANSWER BUTTON */
     .show-answer-btn {
       background: linear-gradient(135deg, #2563eb, #1e40af);
       color: white;
       border: none;
-      padding: 15px 30px;
-      border-radius: 12px;
+      padding: 10px 25px;
+      border-radius: 10px;
       cursor: pointer;
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 600;
       transition: all 0.3s ease;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
     }
 
     .show-answer-btn:hover {
@@ -166,8 +163,8 @@
     }
 
     .answer {
-      margin-top: 20px;
-      font-size: 1.5rem;
+      margin-top: 10px;
+      font-size: 1.3rem;
       color: #2563eb;
       font-weight: 700;
       display: none;
@@ -175,43 +172,79 @@
 
     /* RIGHT PANEL */
     .action-panel {
-      flex: 1;
-      background: rgba(237, 245, 252, 0.9);
-      padding: 40px;
+      flex: 0.8;
+      background: rgba(237, 245, 252, 0.95);
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      gap: 30px;
       border-left: 2px solid rgba(30, 58, 138, 0.5);
     }
 
-    .summary-card {
-      background: rgba(240, 245, 253, 0.92);
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-      border: 1px solid #c2d9f2;
-      color: #1f2937;
+    /* Divide sidebar into two */
+    .nav-section {
+      flex: 0.25;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 15px;
+      border-bottom: 2px solid rgba(30, 58, 138, 0.3);
     }
 
-    .summary-card h3 {
+    .question-section {
+      flex: 0.75;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .question-section h3 {
       color: #1e3a8a;
-      font-size: 1.5rem;
+      font-size: 1.1rem;
       margin-bottom: 10px;
     }
 
-    /* BUTTONS */
+    .question-selector {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .q-btn {
+      padding: 10px 0;
+      background: linear-gradient(135deg, #2563eb, #1e40af);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+      width: 100%;
+    }
+
+    .q-btn:hover {
+      background: linear-gradient(135deg, #1e3a8a, #172554);
+      transform: scale(1.05);
+    }
+
+    /* ROUND NAVIGATION BUTTONS */
     .btn {
       display: block;
-      padding: 15px 30px;
-      font-size: 1.1rem;
+      padding: 10px 20px;
+      font-size: 1rem;
       font-weight: 700;
-      border-radius: 12px;
+      border-radius: 10px;
       text-decoration: none;
       text-align: center;
-      transition: all 0.4s ease;
+      transition: all 0.3s ease;
       color: white;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+      width: 100%;
     }
 
     .btn.back {
@@ -221,6 +254,7 @@
       background: linear-gradient(135deg, #2563eb, #1d4ed8);
       transform: scale(1.05);
     }
+
     .btn.next {
       background: linear-gradient(135deg, #2563eb, #1e40af);
     }
@@ -248,37 +282,44 @@
   <div class="main-wrapper">
     <div class="questions-panel">
       <div class="round-title">
-        <h1>Round 2 <span>4 Pics 1 Word</span></h1>
+        <h1><span>4 Pics 1 Word</span></h1>
         <div class="underline"></div>
       </div>
-<!-- IMAGE HALNE YETA (USE ME) -->
-      <div class="image-grid">
-        <img src="logo.png" alt="image" >
 
+      <div class="image-container">
+        <img src="logo.png" alt="Main Image">
       </div>
 
-      <p class="question-text">Guess the one word that connects all four pictures!</p>
+      <p class="question-text">Guess the one word that connects all pictures!</p>
 
       <button class="show-answer-btn" id="showAnswerBtn">Show Answer</button>
       <p class="answer" id="answer">🌟 ANSWER: ExampleWord 🌟</p>
     </div>
 
+    <!-- ✅ Divided Sidebar -->
     <div class="action-panel">
-      <div class="action-buttons" style="display: flex; flex-direction: column; gap: 15px;">
+
+      <!-- Upper small section -->
+      <div class="nav-section">
         <a href="round3rules.html" class="btn next">Next Round →</a>
-        <a href="round1.html" class="btn back">← Back</a>
+        <a href="round2rules.html" class="btn back">← Back</a>
       </div>
 
-      <div class="summary-card">
-        <h3>Round Info</h3>
-        <p>Each puzzle contains 4 images.</p>
-        <p>Find the one word that connects them all!</p>
+      <!-- Lower large section -->
+      <div class="question-section">
+        <h3>Select Question</h3>
+        <div class="question-selector">
+          <a href="#"><button class="q-btn">Q1</button></a>
+          <a href="#"><button class="q-btn">Q2</button></a>
+          <a href="#"><button class="q-btn">Q3</button></a>
+          <a href="#"><button class="q-btn">Q4</button></a>
+          <a href="#"><button class="q-btn">Q5</button></a>
+          <a href="#"><button class="q-btn">Q6</button></a>
+          <a href="#"><button class="q-btn">Q7</button></a>
+          <a href="#"><button class="q-btn">Q8</button></a>
+        </div>
       </div>
 
-      <div class="summary-card">
-        <h3>Instructions</h3>
-        <p>Click <strong>“Show Answer”</strong> to reveal the correct word.</p>
-      </div>
     </div>
   </div>
 
