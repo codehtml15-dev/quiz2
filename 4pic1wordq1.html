@@ -19,7 +19,7 @@
         linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
       background-size: 30px 30px;
       height: 100vh;
-      overflow: hidden; /* Prevent scrolling */
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -91,30 +91,33 @@
       justify-content: center;
     }
 
+    /* 🔹 UPDATED TITLE STYLING */
     .round-title {
       text-align: center;
-      margin-bottom: 15px;
+      margin-bottom: 5px; /* reduced spacing */
     }
 
     .round-title h1 {
-      font-size: 1.8rem;
+      font-size: 2.5rem; /* bigger title */
       color: #1e3a8a;
-      font-weight: 700;
+      font-weight: 800;
+      line-height: 1.1; /* tighter vertical spacing */
     }
 
     .round-title h1 span {
-      font-size: 1.5rem;
+      font-size: 2.2rem;
       color: #2563eb;
     }
 
     .underline {
-      width: 180px;
+      width: 160px;
       height: 3px;
       background-color: #2563eb;
       border-radius: 2px;
-      margin: 10px auto 20px;
+      margin: 8px auto 10px;
     }
 
+    /* 🔹 UPDATED IMAGE SIZE */
     .image-container {
       width: 100%;
       display: flex;
@@ -124,8 +127,8 @@
     }
 
     .image-container img {
-      width: 60%;
-      max-width: 350px;
+      width: 80%; /* increased from 60% */
+      max-width: 500px; /* bigger max size */
       border-radius: 10px;
       border: 2px solid #2563eb;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
@@ -179,7 +182,6 @@
       border-left: 2px solid rgba(30, 58, 138, 0.5);
     }
 
-    /* Divide sidebar into two */
     .nav-section {
       flex: 0.25;
       display: flex;
@@ -232,7 +234,6 @@
       transform: scale(1.05);
     }
 
-    /* ROUND NAVIGATION BUTTONS */
     .btn {
       display: block;
       padding: 10px 20px;
@@ -262,7 +263,6 @@
       background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
       transform: scale(1.05);
     }
-
   </style>
 </head>
 <body>
@@ -296,30 +296,25 @@
       <p class="answer" id="answer">🌟 ANSWER: ExampleWord 🌟</p>
     </div>
 
-    <!-- ✅ Divided Sidebar -->
     <div class="action-panel">
-
-      <!-- Upper small section -->
       <div class="nav-section">
-        <a href="round3rules.html" class="btn next">Next Round →</a>
-        <a href="round2rules.html" class="btn back">← Back</a>
+        <a href="round7rules.html" class="btn next">Next Round →</a>
+        <a href="4pics1word6.html" class="btn back">← Back</a>
       </div>
 
-      <!-- Lower large section -->
       <div class="question-section">
         <h3>Select Question</h3>
         <div class="question-selector">
-          <a href="#"><button class="q-btn">Q1</button></a>
-          <a href="#"><button class="q-btn">Q2</button></a>
-          <a href="#"><button class="q-btn">Q3</button></a>
-          <a href="#"><button class="q-btn">Q4</button></a>
-          <a href="#"><button class="q-btn">Q5</button></a>
-          <a href="#"><button class="q-btn">Q6</button></a>
-          <a href="#"><button class="q-btn">Q7</button></a>
-          <a href="#"><button class="q-btn">Q8</button></a>
+          <a href="4pic1wordq1.html"><button class="q-btn">Q1</button></a>
+          <a href="4pic1wordq2.html"><button class="q-btn">Q2</button></a>
+          <a href="4pic1wordq3.html"><button class="q-btn">Q3</button></a>
+          <a href="4pic1wordq4.html"><button class="q-btn">Q4</button></a>
+          <a href="4pic1wordq5.html"><button class="q-btn">Q5</button></a>
+          <a href="4pic1wordq6.html"><button class="q-btn">Q6</button></a>
+          <a href="4pic1wordq7.html"><button class="q-btn">Q7</button></a>
+          <a href="4pic1wordq8.html"><button class="q-btn">Q8</button></a>
         </div>
       </div>
-
     </div>
   </div>
 
