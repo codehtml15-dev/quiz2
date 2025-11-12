@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Music Round</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>History Round</title>
   <style>
     * {
       margin: 0;
@@ -13,19 +13,21 @@
     }
 
     body {
-      background: radial-gradient(circle at top, #3b0764, #1e1b4b, #0f172a);
+      background-color: #385a85;
+      background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 30px 30px;
       min-height: 100vh;
-      padding-top: 100px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      color: #f8fafc;
+      color: #1f2937;
     }
 
     nav {
       width: 100%;
-      background: rgba(55, 48, 163, 0.9);
-      padding: 14px 50px;
+      background: rgba(30, 58, 138, 0.95);
+      padding: 12px 50px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -33,307 +35,278 @@
       top: 0;
       left: 0;
       z-index: 1000;
-      box-shadow: 0 0 15px rgba(147, 51, 234, 0.4);
     }
-
     nav .logo {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-
     nav .logo img {
       width: 40px;
-      filter: drop-shadow(0 0 8px #facc15);
     }
-
     nav .logo h3 {
-      color: #facc15;
-      font-size: 1.3rem;
-      font-weight: 700;
-      text-shadow: 0 0 10px rgba(250, 204, 21, 0.7);
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 600;
     }
-
-    h1 {
-      color: #a855f7;
-      font-size: 2.6rem;
-      font-weight: 800;
-      margin-bottom: 30px;
-      text-shadow: 0 0 15px rgba(147, 51, 234, 0.7), 0 0 8px rgba(250, 204, 21, 0.4);
-    }
-
-    .main-container {
+    nav ul {
+      list-style: none;
       display: flex;
-      justify-content: space-between;
-      gap: 30px;
-      width: 90%;
-      max-width: 1200px;
+      gap: 25px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #c7d2fe;
     }
 
-    /* Question Section */
-    .questions {
-      flex: 2;
+    .main-wrapper {
+      display: flex;
+      width: 85%;
+      max-width: 900px;
+      margin-top: 100px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      min-height: 650px;
+      background: rgba(240, 248, 255, 0.9);
+    }
+
+    .questions-panel {
+      flex: 3;
+      padding: 30px 40px;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .round-title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .round-title h1 {
+      font-size: 2.3rem;
+      color: #1e3a8a;
+      font-weight: 700;
+    }
+
+    .underline {
+      width: 220px;
+      height: 4px;
+      background-color: #2563eb;
+      border-radius: 2px;
+      margin: 10px 0 20px 0;
+    }
+
+    .action-panel {
+      flex: 1;
+      background: rgba(237, 245, 252, 0.9);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
       gap: 20px;
+      border-left: 2px solid rgba(30, 58, 138, 0.5);
+      align-items: center;
     }
 
-    .question-box {
-      background: rgba(31, 41, 55, 0.9);
-      border: 1px solid rgba(168, 85, 247, 0.3);
-      border-radius: 18px;
-      box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
-      padding: 20px 25px;
-      transition: all 0.3s ease;
+    .summary-card {
+      background: rgba(240, 245, 253, 0.92);
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid #c2d9f2;
+      color: #1f2937;
+      width: 100%;
     }
 
-    .question-box:hover {
+    .summary-card h3 {
+      color: #1e3a8a;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .question-btn {
+      width: 100%;
+      padding: 20px 0;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      border: 2px solid #1e40af;
+      border-radius: 12px;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      color: white;
+      text-decoration: none;
+      box-shadow: 0 0 12px rgba(37, 99, 235, 0.3);
+      margin-top: 5%;
+    }
+
+    .question-btn:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #2563eb, #1e3a8a);
+    }
+
+    .question-btn.active {
+      background: linear-gradient(135deg, #1e3a8a, #172554);
+      color: #a5b4fc;
       transform: scale(1.02);
-      box-shadow: 0 0 35px rgba(250, 204, 21, 0.25);
+      pointer-events: none;
     }
 
-    .question-box h2 {
-      color: #f8fafc;
-      margin-bottom: 12px;
+    .btn {
+      display: block;
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 12px;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.4s ease;
+      color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn.back {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+    }
+    .btn.back:hover {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      transform: scale(1.05);
+    }
+    .btn.next {
+      background: linear-gradient(135deg, #2563eb, #1e40af);
+      margin-top: 35%;
+    }
+    .btn.next:hover {
+      background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+      transform: scale(1.05);
+    }
+
+    .question-display {
+      margin-top: 30px;
+      padding: 20px;
+      background: #f1f5f9;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
       display: none;
     }
 
     .answer {
+      margin-top: 15px;
       display: none;
-      font-style: italic;
-      color: #d8b4fe;
-      margin-top: 10px;
+      color: #1e3a8a;
+      font-weight: 600;
+      font-size: larger;
     }
 
-    .btn {
-      background: linear-gradient(90deg, #a855f7, #facc15);
+    .reveal-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #2563eb;
       color: white;
       border: none;
-      padding: 8px 18px;
-      margin-top: 10px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
-    }
-
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(250, 204, 21, 0.6);
-    }
-
-    /* Scoreboard Section */
-    .scoreboard {
-      flex: 1;
-      background: rgba(31, 41, 55, 0.9);
-      border-radius: 18px;
-      border: 1px solid rgba(168, 85, 247, 0.3);
-      box-shadow: 0 0 25px rgba(147, 51, 234, 0.2);
-      padding: 25px;
-      text-align: center;
-      height: fit-content;
-      position: sticky;
-      top: 120px;
-    }
-
-    .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: linear-gradient(90deg, #a855f7, #facc15);
-      color: white;
-      text-decoration: none;
-      padding: 6px 12px;
       border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      transition: all 0.3s ease;
-      margin-bottom: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .reveal-btn:hover {
+      background: #1e40af;
     }
 
-    .back-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
-    }
-
-    .scoreboard h2 {
-      color: #facc15;
-      margin-bottom: 20px;
-      text-shadow: 0 0 8px rgba(250, 204, 21, 0.6);
-    }
-
-    .scores {
+    .question-list {
       display: flex;
       flex-direction: column;
       gap: 15px;
-    }
-
-    .house {
-      background: rgba(17, 24, 39, 0.8);
-      padding: 12px;
-      border-radius: 12px;
-      box-shadow: inset 0 0 8px rgba(168, 85, 247, 0.2);
-      transition: all 0.3s ease;
-    }
-
-    .house:hover {
-      transform: scale(1.03);
-    }
-
-    .house h3 {
-      color: #a855f7;
-      font-size: 1.2rem;
-      margin-bottom: 5px;
-      text-shadow: 0 0 6px rgba(168, 85, 247, 0.4);
-    }
-
-    .score {
-      font-weight: 700;
-      font-size: 1.3rem;
-      margin-bottom: 8px;
-      color: #f8fafc;
-    }
-
-    .controls button {
-      background: #a855f7;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      padding: 4px 8px;
-      margin: 2px;
-      cursor: pointer;
-      font-size: 0.8rem;
-      transition: 0.3s;
-    }
-
-    .controls button:hover {
-      background: #7e22ce;
-    }
-
-    @media (max-width: 900px) {
-      .main-container {
-        flex-direction: column;
-      }
-
-      .scoreboard {
-        position: relative;
-        top: 0;
-      }
+      width: 100%;
     }
   </style>
 </head>
 <body>
-
   <nav>
     <div class="logo">
-      <img src="logo.png" alt="Logo">
+      <img src="logo.png" alt="Logo" />
       <h3>Fluorescent Secondary</h3>
     </div>
+    <ul>
+      <li><a href="main.html">Home</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+      <li><a href="#">Results</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
   </nav>
 
-  <h1>🎵 Music Round</h1>
+  <div class="main-wrapper">
+    <div class="questions-panel">
+      <div class="round-title">
+        <h1>Music Round</h1>
+        <div class="underline"></div>
+      </div>
 
-  <div class="main-container">
-    <!-- Questions Section -->
-    <div class="questions" id="questionsContainer"></div>
+      <!-- Question display area -->
+      <div id="question-area" class="question-display">
+        <h2 id="question-text"></h2>
+        <button id="reveal-btn" class="reveal-btn">Reveal Answer</button>
+        <p id="answer-text" class="answer"></p>
+      </div>
+    </div>
 
-    <!-- Scoreboard -->
-    <div class="scoreboard">
-      <a href="mixedbag.html" class="back-btn">← Back</a>
-      <h2>🏆 Scoreboard</h2>
-      <div class="scores">
-        <div class="house">
-          <h3>Yellow House</h3>
-          <div class="score" id="yellowScore">0</div>
-          <div class="controls">
-            <button onclick="changeScore('Yellow', 1)">+1</button>
-            <button onclick="changeScore('Yellow', -1)">-1</button>
-          </div>
-        </div>
-        <div class="house">
-          <h3>Blue House</h3>
-          <div class="score" id="blueScore">0</div>
-          <div class="controls">
-            <button onclick="changeScore('Blue', 1)">+1</button>
-            <button onclick="changeScore('Blue', -1)">-1</button>
-          </div>
-        </div>
-        <div class="house">
-          <h3>Red House</h3>
-          <div class="score" id="redScore">0</div>
-          <div class="controls">
-            <button onclick="changeScore('Red', 1)">+1</button>
-            <button onclick="changeScore('Red', -1)">-1</button>
-          </div>
-        </div>
-        <div class="house">
-          <h3>Green House</h3>
-          <div class="score" id="greenScore">0</div>
-          <div class="controls">
-            <button onclick="changeScore('Green', 1)">+1</button>
-            <button onclick="changeScore('Green', -1)">-1</button>
-          </div>
-        </div>
+    <div class="action-panel">
+      <div class="question-list">
+        <button class="question-btn" data-id="q1">Q1</button>
+        <button class="question-btn" data-id="q2">Q2</button>
+        <button class="question-btn" data-id="q3">Q3</button>
+        <button class="question-btn" data-id="q4">Q4</button>
+      </div>
+
+      
+      <div class="action-buttons" style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
+        <a href="round2rules.html" class="btn next">Next Round →</a>
+        <a href="historyrules.html" class="btn back">← Back</a>
       </div>
     </div>
   </div>
 
   <script>
-    // 🎶 Music-Themed Questions
-    const questions = [
-      { q: "Which artist is known as the 'King of Pop'?", a: "Michael Jackson" },
-      { q: "Which band released the album 'Abbey Road'?", a: "The Beatles" },
-      { q: "Who is the youngest solo artist to win Album of the Year at the Grammys?", a: "Billie Eilish" },
-      { q: "What is the stage name of Stefani Joanne Angelina Germanotta?", a: "Lady Gaga" }
-    ];
+    const questionButtons = document.querySelectorAll('.question-btn');
+    const questionArea = document.getElementById('question-area');
+    const questionText = document.getElementById('question-text');
+    const answerText = document.getElementById('answer-text');
+    const revealBtn = document.getElementById('reveal-btn');
 
-    const container = document.getElementById("questionsContainer");
-
-    // Generate Questions
-    questions.forEach((item, index) => {
-      const qBox = document.createElement("div");
-      qBox.classList.add("question-box");
-
-      qBox.innerHTML = `
-        <button class="btn" onclick="showQuestion('q${index}')">Show Question ${index + 1}</button>
-        <h2 id="q${index}">${item.q}</h2>
-        <button class="btn" onclick="toggleAnswer('ans${index}')">Reveal Answer</button>
-        <p id="ans${index}" class="answer">${item.a}</p>
-      `;
-
-      container.appendChild(qBox);
-    });
-
-    function showQuestion(id) {
-      document.getElementById(id).style.display = "block";
-    }
-
-    function toggleAnswer(id) {
-      const ans = document.getElementById(id);
-      ans.style.display = ans.style.display === "block" ? "none" : "block";
-    }
-
-    // Load and Save Scores
-    const scores = JSON.parse(localStorage.getItem("musicScores")) || {
-      Yellow: 0, Blue: 0, Red: 0, Green: 0
+    const questions = {
+      q1: { text: "Who was the first President of the United States?", answer: "George Washington" },
+      q2: { text: "In which year did World War II end?", answer: "1945" },
+      q3: { text: "Which empire built the Colosseum in Rome?", answer: "The Roman Empire" },
+      q4: { text: "Who was known as the Iron Lady?", answer: "Margaret Thatcher" }
     };
 
-    function updateScores() {
-      document.getElementById("yellowScore").textContent = scores.Yellow;
-      document.getElementById("blueScore").textContent = scores.Blue;
-      document.getElementById("redScore").textContent = scores.Red;
-      document.getElementById("greenScore").textContent = scores.Green;
-      localStorage.setItem("musicScores", JSON.stringify(scores));
-    }
+    questionButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        questionButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
 
-    function changeScore(house, val) {
-      if (scores[house] + val < 0) return;
-      scores[house] += val;
-      updateScores();
-    }
+        const qId = button.getAttribute('data-id');
+        questionText.textContent = questions[qId].text;
+        answerText.textContent = questions[qId].answer;
+        answerText.style.display = "none";
+        questionArea.style.display = "block";
+      });
+    });
 
-    updateScores();
+    revealBtn.addEventListener('click', () => {
+      answerText.style.display = "block";
+    });
   </script>
 </body>
 </html>
