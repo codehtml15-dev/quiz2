@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Round 2 - Buzzer Round | Fluorescent Secondary</title>
+  <title>Round 1 - Rules & Regulations | Fluorescent Secondary</title>
   <style>
     /* Reset and Base Styles */
     * {
@@ -14,18 +14,21 @@
     }
 
     body {
+      /* Darker Blue Base with a high-contrast geometric grid */
       background-color: #385a85; 
       background-image: 
+          /* Geometric grid pattern */
           linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
           linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
       background-size: 30px 30px; 
+      
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    /* Navbar */
+    /* Navbar (Primary Indigo) */
     nav {
       width: 100%;
       background: rgba(30, 58, 138, 0.98); 
@@ -39,14 +42,15 @@
       z-index: 1000;
     }
 
+    /* Navbar Inner Styles Unchanged */
     nav .logo { display: flex; align-items: center; gap: 10px; }
     nav .logo img { width: 40px; }
     nav .logo h3 { color: #fff; font-size: 1.2rem; font-weight: 600; }
     nav ul { list-style: none; display: flex; gap: 25px; }
     nav ul li a { text-decoration: none; color: #fff; font-weight: 500; transition: color 0.3s; }
     nav ul li a:hover { color: #d1d5db; }
-
-    /* Layout */
+    
+    /* --- TWO-PANEL LAYOUT --- */
     .main-wrapper {
         display: flex;
         width: 90%;
@@ -58,16 +62,19 @@
         min-height: 700px;
     }
 
+    /* Left Panel: Rules and Details (Blue-Tinted Transparent) */
     .rules-panel {
         flex: 2; 
+        /* Blue Tint (#f0f5fd) with 92% opacity */
         background-color: rgba(240, 245, 253, 0.92); 
         padding: 40px 60px;
     }
     
     .rules-panel h1 {
-        color: #1e3a8a;
+        color: #1e3a8a; /* Indigo */
         font-size: 2.5rem;
         margin-bottom: 5px;
+        text-align: left;
     }
     
     .rules-panel .tagline {
@@ -76,33 +83,42 @@
         color: #6b7280;
         margin-bottom: 40px;
         display: block;
+        text-align: left;
         border-bottom: 1px solid #e0e0e0;
         padding-bottom: 15px;
     }
 
     .rules h2 {
-        color: #1e3a8a;
+        color: #1e3a8a; /* Indigo */
         font-size: 1.6rem;
         margin-bottom: 25px;
+        text-align: left;
+        position: relative;
     }
 
+    /* Underline under H2 is Bright Azure */
     .rules h2::after {
         content: '';
         display: block;
         width: 50px;
         height: 3px;
-        background: #0077b6;
-        margin-top: 5px;
+        background: #0077b6; /* Azure Accent for clear separation */
+        margin: 5px 0 0;
         border-radius: 5px;
     }
     
+    /* Rules List: VERY Light Blue and MORE Transparent */
     .rules ul {
+        /* Very Light Blue Tint (#f5faff) with 80% opacity */
         background-color: rgba(245, 250, 255, 0.80); 
         padding: 25px;
         border-radius: 8px;
         box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05); 
+        
         list-style-type: none;
+        margin-top: 0;
         font-size: 1.05rem;
+        text-align: left;
     }
 
     .rules ul li {
@@ -116,7 +132,7 @@
     
     .rules ul li::before {
         content: '▪'; 
-        color: #0077b6;
+        color: #0077b6; /* Azure Accent */
         font-weight: 700;
         font-size: 1.2em;
         position: absolute;
@@ -125,11 +141,11 @@
     }
 
     .rules strong {
-        color: #1e3a8a;
+        color: #1e3a8a; /* Indigo */
         font-weight: 700;
     }
 
-    /* Right Panel */
+    /* Right Panel: Actions and Summary */
     .action-panel {
         flex: 1; 
         background-color: rgba(237, 245, 252, 0.9); 
@@ -141,7 +157,7 @@
         border-left: 2px solid rgba(216, 227, 240, 0.5); 
     }
     
-    .summary-card {
+    .action-panel .summary-card {
         background: rgba(240, 245, 253, 0.92);
         border-radius: 10px;
         padding: 20px;
@@ -150,7 +166,7 @@
     }
     
     .action-panel h3 {
-        color: #1e3a8a;
+        color: #1e3a8a; 
         font-size: 1.5rem;
         margin-bottom: 15px;
     }
@@ -161,6 +177,7 @@
         line-height: 1.4;
     }
 
+    /* Button styles */
     .btn {
       display: block; 
       padding: 15px 30px;
@@ -183,12 +200,12 @@
     }
 
     .btn.next {
-      background: #0077b6;
+      background: #0077b6; /* Azure Accent */
       color: #fff;
     }
 
     .btn.next:hover {
-      background: #1e3a8a;
+      background: #1e3a8a; /* Hover to Indigo */
       transform: translateY(-2px);
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     }
@@ -212,18 +229,19 @@
     
     <div class="rules-panel">
         <h1>Round 2: Buzzer Round</h1>
-        <p class="tagline">“See it, think it, answer it — let your eyes lead your mind!”</p>
+        <p class="tagline">Choose wisely, answer quickly — every number counts!</p>
         
         <div class="rules">
-            <h2>Rules & Format</h2>
+            <h2>Rules & Regulations</h2>
             <ul>
-                <li>Each house will be shown <strong>4 images</strong> related to various topics.</li>
-                <li>Participants must identify the image and answer the related question correctly.</li>
-                <li>Each correct answer carries <strong>10 points</strong>.</li>
-                <li>No passing of questions to other houses.</li>
-                <li>Participants will have <strong>15 seconds</strong> to respond after the image is displayed.</li>
-                <li>Once an answer is given, it cannot be changed.</li>
-                <li>Audience and other houses must remain silent during a team’s turn.</li>
+              <li>Each house will get <strong>4 questions</strong> in total.</li>
+              <li>Every question must be answered within a <strong>20-second time limit</strong>.</li>
+              <li>Once a number is chosen, that question <strong>cannot be changed or skipped</strong>.</li>
+              <li><strong>No question</strong> can be repeated or chosen by another team.</li>
+              <li>If a team fails to answer within the time, the question will be considered <strong>missed</strong>.</li>
+              <li>There will be <strong>no passing</strong> of questions to other houses.</li>
+              <li>Points will be awarded based on the correctness of the answer.</li>
+              <li>Teams must maintain discipline and avoid discussing during other teams’ turns.</li>
             </ul>
         </div>
     </div>
@@ -231,21 +249,19 @@
     <div class="action-panel">
         <div class="summary-card">
             <h3>Round Details</h3>
-            <p><strong>Total Images:</strong> 4 per House</p>
-            <p><strong>Response Time:</strong> 15 seconds</p>
+            <p><strong>Total Questions:</strong> 4 per House</p>
+            <p><strong>Time Limit:</strong> 20 seconds per question</p>
             <p><strong>Status:</strong> Awaiting Start</p>
         </div>
         
         <div class="action-buttons" style="margin-top: 20px;">
-            <a href="r2.html" class="btn next">Start Round 2 →</a>
-            <a href="r1.html" class="btn back">← Back</a>
+            <a href="r1.html" class="btn next">Start Round 2 →</a>
+            <a href="main.html" class="btn back">← Back to Overview</a>
         </div>
         
         <div class="summary-card" style="margin-top: 30px;">
-            <h3>Instructions</h3>
-            <p style="font-size: 0.95rem; font-style: italic; color: #6b7280;">
-              Ensure the buzzer system is active before starting this round.
-            </p>
+            <h3 style="margin-top: 0;">Instructions</h3>
+            <p style="font-size: 0.95rem; font-style: italic; color: #6b7280;">Please ensure the scoring judge is ready before clicking 'Start Round 1'.</p>
         </div>
     </div>
 
