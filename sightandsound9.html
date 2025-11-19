@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sight and Sound Round</title>
+
   <style>
     * { margin:0; padding:0; box-sizing:border-box; font-family:"Poppins","Segoe UI",Arial,sans-serif; }
     body {
@@ -30,7 +31,7 @@
       top:0; left:0; z-index:1000;
     }
     nav .logo { display:flex; gap:10px; align-items:center; }
-    nav .logo img { width:40px; height:auto; }
+    nav .logo img { width:40px; }
     nav .logo h3 { color:#fff; font-size:1.1rem; font-weight:600; }
     nav ul { list-style:none; display:flex; gap:20px; }
     nav ul a { color:#fff; text-decoration:none; font-weight:500; }
@@ -38,132 +39,157 @@
     .page {
       width:92%;
       max-width:1200px;
-      margin-top:110px;
+      margin-top:140px;      /* REDUCED from 110px */
       background: rgba(250,251,255,0.95);
       border-radius:14px;
       box-shadow:0 12px 40px rgba(0,0,0,0.35);
       overflow:hidden;
+      height: 550px;
     }
 
     .header {
-      padding:28px 36px;
+      padding:22px 32px;   /* slightly reduced */
       text-align:center;
       border-bottom:1px solid rgba(30,58,138,0.06);
     }
     .header h1 {
-      font-size:2.6rem;
+      font-size:2.4rem;
       color:#FFD700;
       font-weight:800;
       letter-spacing:2px;
-      margin-bottom:8px;
+      margin-bottom:6px;
     }
     .header p { color:#1e3a8a; font-weight:600; }
 
     .split {
       display:grid;
       grid-template-columns: 1fr 1fr;
-      gap:0;
       position:relative;
     }
     .split::before{
       content:'';
       position:absolute;
       left:50%;
-      top:16px;
-      bottom:16px;
+      top:12px;
+      bottom:12px;
       width:2px;
       transform:translateX(-50%);
-      background: linear-gradient(180deg, rgba(30,58,138,0.12), rgba(30,58,138,0.02));
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.02), 0 6px 18px rgba(16,24,40,0.06);
-      z-index:10;
+      background: rgba(30,58,138,0.12);
     }
 
     .panel {
-      padding:36px;
-      min-height:420px;
+      padding:24px;               /* REDUCED from 36px */
+      min-height:380px;           /* slightly smaller */
       display:flex;
       flex-direction:column;
       align-items:center;
-      gap:18px;
+      gap:16px;
     }
-    .panel-title { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
-    .panel-title h2 { font-size:1.6rem; color:#0b3a78; font-weight:800; letter-spacing:1px; }
-    .panel-sub { color:#2563eb; font-weight:700; font-size:0.95rem; }
+
+    .panel-title { display:flex; align-items:center; gap:10px; }
+    .panel-title h2 { font-size:1.5rem; color:#0b3a78; font-weight:800; }
+    .panel-sub { color:#2563eb; font-weight:700; margin-bottom:6px; }
 
     .buttons {
       display:grid;
       grid-template-columns: repeat(2, 1fr);
-      gap:20px;
+      gap:16px;
       width:100%;
-      max-width:560px;
-      justify-items:center;
-      align-items:center;
-      margin-top:6px;
+      max-width:520px;
+      margin-top:4px;
     }
 
     .qs-btn {
       width:86%;
-      min-width:200px;
-      max-width:300px;
-      padding:18px 28px;
+      min-width:180px;
+      padding:16px 24px;
       border-radius:12px;
       background: linear-gradient(135deg,#3b82f6,#2563eb);
       color:#fff;
-      font-size:1.8rem;
+      font-size:1.6rem;
       font-weight:800;
       display:flex;
       align-items:center;
       justify-content:center;
       cursor:pointer;
       border:1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 8px 20px rgba(16,24,40,0.14), inset 0 -6px 18px rgba(255,255,255,0.03);
-      transition: transform 200ms ease, box-shadow 200ms ease, background 200ms;
-      user-select:none;
-      position:relative;
-      overflow:hidden;
+      box-shadow: 0 8px 20px rgba(16,24,40,0.14);
+      transition: transform 200ms ease, box-shadow 200ms ease;
     }
-    .qs-btn:hover { transform: translateY(-6px); box-shadow: 0 18px 38px rgba(16,24,40,0.2); }
-    .qs-btn.active { background: linear-gradient(135deg,#1e3a8a,#172554); color:#c7d2fe; transform: translateY(-4px); }
+    .qs-btn:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(16,24,40,0.2); }
 
-    .badge { width:36px; height:36px; border-radius:10px; display:inline-flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.12); margin-right:10px; font-weight:800; color:#fff; box-shadow: inset 0 -2px 4px rgba(0,0,0,0.12); }
+    .badge { width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.12); color:#fff; font-weight:800; }
 
-    .panel-left { background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(241,247,255,0.98)); }
-    .panel-right { background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(245,251,255,0.98)); }
+    /* --------------------------- */
+    /* OVERLAY                     */
+    /* --------------------------- */
+    #overlay {
+      position:fixed; inset:0;
+      display:none;
+      background:rgba(0,0,0,0.65);
+      z-index:2000;
+      justify-content:center;
+      align-items:center;
+    }
 
-    .hint { color:#1f3a6d; font-weight:600; text-align:center; margin-top:6px; }
+    #overlay-content {
+      width:94%;
+      max-width:900px;
+      background:rgba(225,240,255,0.96);
+      padding:20px;
+      border-radius:12px;
+      position:relative;
+      text-align:center;
+      box-shadow:0 10px 30px rgba(0,0,0,0.36);
+    }
 
-    #overlay { position:fixed; inset:0; display:none; background:rgba(0,0,0,0.65); z-index:2000; justify-content:center; align-items:center; }
-    #overlay-content { width:94%; max-width:900px; background:rgba(225,240,255,0.96); padding:24px; border-radius:12px; position:relative; box-shadow:0 10px 30px rgba(0,0,0,0.36); text-align:center; }
-    #overlay h1 { font-size:1.6rem; color:#0a2a66; margin-bottom:12px; }
-    #overlay .question-area { font-size:1.03rem; color:#222; min-height:120px; margin-bottom:14px; white-space:pre-wrap; }
-    #overlay .media-wrap { margin:12px 0; display:flex; justify-content:center; gap:12px; align-items:center; flex-direction:column; }
-    #overlay img { max-width:92%; height:auto; border-radius:8px; box-shadow:0 8px 20px rgba(16,24,40,0.18); }
-    #overlay audio { width:100%; max-width:560px; outline:none; }
+    #overlay h1 { font-size:1.5rem; color:#0a2a66; margin-bottom:10px; }
+    #overlay .question-area { min-height:100px; margin-bottom:10px; }
 
-    .overlay-btn { position:absolute; bottom:12px; padding:10px 14px; border-radius:10px; font-weight:700; color:#fff; border:none; cursor:pointer; }
+    .media-wrap {
+      margin:6px 0;      /* REDUCED from 12px */
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:10px;
+    }
+
+    #overlay video, #overlay audio {
+      max-width:92%;
+      border-radius:10px;
+    }
+
+    .overlay-btn {
+      position:absolute;
+      bottom:12px;
+      padding:10px 14px;
+      border-radius:10px;
+      font-weight:700;
+      color:#fff;
+      border:none;
+      cursor:pointer;
+    }
     .overlay-back { left:12px; background:#6b7280; }
     .overlay-answer { right:12px; background:#2563eb; }
 
     @media (max-width:900px){
       .split { grid-template-columns:1fr; }
       .split::before { display:none; }
-      .panel { padding:22px; }
-      .buttons { max-width:420px; }
+      .panel { min-height:360px; }
     }
     @media (max-width:520px){
-      .qs-btn { width:92%; min-width:160px; font-size:1.4rem; padding:14px 18px; border-radius:10px; }
+      .qs-btn { font-size:1.3rem; padding:12px 18px; }
       .header h1 { font-size:1.9rem; }
     }
   </style>
 </head>
+
 <body>
 
 <nav>
   <div class="logo">
-    <a href="#" style="display:flex; gap:10px; align-items:center; text-decoration:none;">
-      <img src="logo.png" alt="logo"/>
-      <h3 style="color:#fff;">Fluorescent Secondary</h3>
-    </a>
+    <img src="logo.png" alt="logo"/>
+    <h3>Fluorescent Secondary</h3>
   </div>
   <ul>
     <li><a href="#">Home</a></li>
@@ -173,137 +199,122 @@
   </ul>
 </nav>
 
-<div class="page" role="main">
+<div class="page">
   <div class="header">
     <h1>Sight and Sound Round</h1>
-    <p>Left: Sight (Visuals) — Right: Sound (Audio)</p>
+    <p>Left: Sight (Videos) — Right: Sound (Audio)</p>
   </div>
 
   <div class="split">
-    <!-- SIGHT PANEL -->
-    <section class="panel panel-left" aria-labelledby="sightTitle">
-      <div class="panel-title">
-        <div class="badge">👁️</div>
-        <h2 id="sightTitle">Sight</h2>
-      </div>
-      <div class="panel-sub">Visual questions (4)</div>
+
+    <!-- SIGHT -->
+    <section class="panel">
+      <div class="panel-title"><div class="badge">👁️</div><h2>Sight</h2></div>
+      <div class="panel-sub">Video Questions (4)</div>
       <div class="buttons" id="sightButtons"></div>
-      <div class="hint">Click a card to open the visual question and view the image. Replace the example image URLs below if needed.</div>
     </section>
 
-    <!-- SOUND PANEL -->
-    <section class="panel panel-right" aria-labelledby="soundTitle">
-      <div class="panel-title">
-        <div class="badge">🔊</div>
-        <h2 id="soundTitle">Sound</h2>
-      </div>
-      <div class="panel-sub">Audio questions (4)</div>
+    <!-- SOUND -->
+    <section class="panel">
+      <div class="panel-title"><div class="badge">🔊</div><h2>Sound</h2></div>
+      <div class="panel-sub">Audio Questions (4)</div>
       <div class="buttons" id="soundButtons"></div>
-      <div class="hint">Click a card to open the audio question. Replace the example audio URLs below if needed.</div>
     </section>
+
   </div>
 </div>
 
-<!-- Overlay for showing question/answer/media -->
-<div id="overlay" role="dialog" aria-modal="true" aria-hidden="true">
-  <div id="overlay-content" role="document">
+<!-- OVERLAY -->
+<div id="overlay">
+  <div id="overlay-content">
     <h1 id="overlay-title"></h1>
     <div class="question-area" id="overlay-question"></div>
     <div class="media-wrap" id="overlay-media"></div>
-    <div class="answer-text" id="overlay-answer"></div>
+    <div id="overlay-answer" style="display:none; font-weight:600;"></div>
+
     <button class="overlay-btn overlay-back" onclick="closeOverlay()">← Back</button>
     <button class="overlay-btn overlay-answer" onclick="showAnswer()">Show Answer</button>
   </div>
 </div>
 
 <script>
-  // Sight items: example public image URLs (replace these with your own if you want)
+  /* VIDEO QUESTIONS */
   const sightQuestions = [
-    { q: "Visual 1: Identify this landmark.", a: "Answer: Example Landmark", imageSrc: "https://via.placeholder.com/800x450.png?text=Visual+1" },
-    { q: "Visual 2: Name the object shown.", a: "Answer: Example Object", imageSrc: "https://via.placeholder.com/800x450.png?text=Visual+2" },
-    { q: "Visual 3: Which art style is this?", a: "Answer: Example Movement", imageSrc: "https://via.placeholder.com/800x450.png?text=Visual+3" },
-    { q: "Visual 4: Identify the logo.", a: "Answer: Example Brand", imageSrc: "https://via.placeholder.com/800x450.png?text=Visual+4" }
+    { q:"Visual 1: Identify this landmark.", a:"Example Landmark", videoSrc:"viudeo.mp4" },
+    { q:"Visual 2: Name this object.", a:"Example Object", videoSrc:"viudeo.mp4" },
+    { q:"Visual 3: What art style is this?", a:"Example Art Style", videoSrc:"viudeo.mp4" },
+    { q:"Visual 4: Identify this logo.", a:"Example Brand", videoSrc:"viudeo.mp4" }
   ];
 
-  // Sound items: example public MP3 URLs (replace these with your own if you want)
+  /* AUDIO QUESTIONS */
   const soundQuestions = [
-    { q: "Audio 1: Which instrument plays here?", a: "Answer: Example Instrument", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
-    { q: "Audio 2: Name the song from this clip.", a: "Answer: Example Song", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
-    { q: "Audio 3: Which animal sound is this?", a: "Answer: Example Animal", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
-    { q: "Audio 4: Identify the language spoken.", a: "Answer: Example Language", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" }
+    { q:"Audio 1: Which instrument is playing?", a:"Example Instrument", audioSrc:"audio1.mp3" },
+    { q:"Audio 2: Name the song.", a:"Example Song", audioSrc:"audio2.mp3" },
+    { q:"Audio 3: Identify the animal sound.", a:"Example Animal", audioSrc:"audio3.mp3" },
+    { q:"Audio 4: Identify the language.", a:"Example Language", audioSrc:"audio4.mp3" }
   ];
 
-  const sightContainer = document.getElementById('sightButtons');
-  const soundContainer = document.getElementById('soundButtons');
-  const overlay = document.getElementById('overlay');
-  const overlayTitle = document.getElementById('overlay-title');
-  const overlayQuestion = document.getElementById('overlay-question');
-  const overlayMedia = document.getElementById('overlay-media');
-  const overlayAnswer = document.getElementById('overlay-answer');
+  const sightContainer = document.getElementById("sightButtons");
+  const soundContainer = document.getElementById("soundButtons");
+  const overlay = document.getElementById("overlay");
+  const overlayTitle = document.getElementById("overlay-title");
+  const overlayQuestion = document.getElementById("overlay-question");
+  const overlayMedia = document.getElementById("overlay-media");
+  const overlayAnswer = document.getElementById("overlay-answer");
 
-  function createPanelButtons(container, items, type) {
-    for (let i = 0; i < 4; i++) {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'qs-btn';
-      btn.innerText = `Q${i+1}`;
-      btn.title = items[i] && items[i].q ? items[i].q : `${type} question ${i+1}`;
-
-      btn.addEventListener('click', () => {
-        btn.classList.add('active');
-        const obj = items[i] || { q: "Question not available", a: "Answer not available" };
-        openOverlay(type, i+1, obj);
-      });
-
-      btn.addEventListener('keyup', (e) => { if (e.key === 'Enter' || e.key === ' ') btn.click(); });
-
+  function createButtons(container, list, type){
+    list.forEach((item, idx)=>{
+      const btn = document.createElement("button");
+      btn.className = "qs-btn";
+      btn.textContent = "Q" + (idx+1);
+      btn.onclick = ()=> openOverlay(type, idx+1, item);
       container.appendChild(btn);
-    }
+    });
   }
 
-  createPanelButtons(sightContainer, sightQuestions, 'Sight');
-  createPanelButtons(soundContainer, soundQuestions, 'Sound');
+  createButtons(sightContainer, sightQuestions, "Sight");
+  createButtons(soundContainer, soundQuestions, "Sound");
 
-  function openOverlay(type, num, item) {
-    overlayTitle.innerText = `${type} Q${num}`;
-    overlayQuestion.innerText = item.q || '';
-    overlayAnswer.innerText = item.a || '';
-    overlayAnswer.style.display = 'none';
+  function openOverlay(type, num, item){
+    overlayTitle.textContent = `${type} Q${num}`;
+    overlayQuestion.textContent = item.q;
+    overlayAnswer.style.display = "none";
+    overlayAnswer.textContent = item.a;
 
-    // clear previous media
-    overlayMedia.innerHTML = '';
+    overlayMedia.innerHTML = "";
 
-    if (type === 'Sight') {
-      const img = document.createElement('img');
-      img.src = item.imageSrc || '';
-      img.alt = item.q || `Sight Q${num}`;
-      overlayMedia.appendChild(img);
-    } else {
-      const audio = document.createElement('audio');
-      audio.controls = true;
-      audio.preload = 'none';
-      audio.src = item.audioSrc || '';
-      overlayMedia.appendChild(audio);
-      setTimeout(()=>{ try { audio.play().catch(()=>{}); } catch(e){} }, 250);
+    if(item.videoSrc){
+      const v = document.createElement("video");
+      v.src = item.videoSrc;
+      v.controls = true;
+      overlayMedia.appendChild(v);
+      setTimeout(()=>v.play().catch(()=>{}), 250);
     }
 
-    overlay.style.display = 'flex';
-    overlay.setAttribute('aria-hidden','false');
+    if(item.audioSrc){
+      const a = document.createElement("audio");
+      a.src = item.audioSrc;
+      a.controls = true;
+      overlayMedia.appendChild(a);
+      setTimeout(()=>a.play().catch(()=>{}), 250);
+    }
+
+    overlay.style.display = "flex";
   }
 
-  function closeOverlay() {
-    const aud = overlayMedia.querySelector('audio');
-    if (aud && !aud.paused) try { aud.pause(); } catch(e){}
-    overlay.style.display = 'none';
-    overlay.setAttribute('aria-hidden','true');
+  function closeOverlay(){
+    overlayMedia.querySelectorAll("video, audio").forEach(m=>{
+      try{ m.pause(); }catch(e){}
+    });
+    overlay.style.display = "none";
   }
 
-  function showAnswer() {
-    overlayAnswer.style.display = 'block';
+  function showAnswer(){
+    overlayAnswer.style.display = "block";
   }
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay.style.display === 'flex') closeOverlay();
+  document.addEventListener("keydown", e=>{
+    if(e.key === "Escape") closeOverlay();
   });
 </script>
 
