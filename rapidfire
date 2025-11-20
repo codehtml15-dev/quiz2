@@ -1,0 +1,271 @@
+Saugat
+Sat, Nov 8, 7:21 PM (10 days ago)
+to me
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rapid Fire Round</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #385a85;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 30px 30px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #1f2937;
+    }
+
+    /* NAVIGATION BAR */
+    nav {
+      width: 100%;
+      background: rgba(30, 58, 138, 0.95);
+      padding: 12px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+    nav .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    nav .logo img {
+      width: 40px;
+    }
+    nav .logo h3 {
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #c7d2fe;
+    }
+
+    /* BACK BUTTON BELOW NAV */
+    .below-nav {
+      margin-top: 80px;
+      width: 90%;
+      display: flex;
+      justify-content: flex-start;
+    }
+    .back-btn {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      border: none;
+      color: white;
+      padding: 10px 25px;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .back-btn:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #2563eb, #1e3a8a);
+    }
+
+    /* MAIN CONTENT */
+    .main-wrapper {
+      width: 90%;
+      max-width: 900px;
+      margin-top: 30px;
+      background: rgba(240, 248, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      padding: 50px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #1e3a8a;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .underline {
+      width: 200px;
+      height: 4px;
+      background-color: #2563eb;
+      margin: 10px auto 30px;
+      border-radius: 2px;
+    }
+
+    .timer {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1e3a8a;
+      background: rgba(255, 255, 255, 0.7);
+      display: inline-block;
+      padding: 10px 25px;
+      border-radius: 10px;
+      border: 2px solid #2563eb;
+      margin-bottom: 25px;
+    }
+
+    .question-box {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 25px;
+      font-size: 1.6rem;
+      color: #1f2937;
+      transition: all 0.3s ease;
+    }
+
+    .question-box:hover {
+      transform: scale(1.02);
+    }
+
+    .next-btn {
+      margin-top: 20px;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 30px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .next-btn:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #2563eb, #1e3a8a);
+    }
+
+    .disabled {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .time-up {
+      color: red;
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">
+      <img src="logo.png" alt="School Logo" />
+      <h3>Fluorescent Secondary</h3>
+    </div>
+    <ul>
+      <li><a href="main.html">Home</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+      <li><a href="#">Results</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="below-nav">
+    <button class="back-btn" onclick="history.back()">← Back</button>
+  </div>
+
+  <div class="main-wrapper">
+    <h1>Rapid Fire Round</h1>
+    <div class="underline"></div>
+    <div class="timer" id="timer">Time Left: 01:00</div>
+
+    <div id="question-container"></div>
+    <p id="time-up-message" class="time-up" style="display:none;">⏰ Time’s Up! You can’t continue — please go back.</p>
+  </div>
+
+  <script>
+    const questions = [
+      "What is the capital city of Japan?",
+      "Which planet is known as the Red Planet?",
+      "Who wrote ‘Romeo and Juliet’?",
+      "What gas do plants absorb from the atmosphere?",
+      "Who invented the light bulb?",
+      "What is the largest mammal on Earth?",
+      "Which ocean is the deepest?",
+      "In which continent is the Sahara Desert located?",
+      "What is the boiling point of water in Celsius?",
+      "Who painted the Mona Lisa?"
+    ];
+
+    const questionContainer = document.getElementById("question-container");
+    const timerDisplay = document.getElementById("timer");
+    const timeUpMsg = document.getElementById("time-up-message");
+
+    let currentQuestion = 0;
+    let time = 60; // 1 minute total
+
+    // Show first question
+    function showQuestion() {
+      questionContainer.innerHTML = "";
+      const div = document.createElement("div");
+      div.classList.add("question-box");
+      div.innerHTML = `
+        <p><strong>Q${currentQuestion + 1}:</strong> ${questions[currentQuestion]}</p>
+        <button class="next-btn" id="nextBtn">Next</button>
+      `;
+      questionContainer.appendChild(div);
+
+      const nextBtn = document.getElementById("nextBtn");
+      nextBtn.addEventListener("click", nextQuestion);
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        questionContainer.innerHTML = `
+          p>
+        `;
+      }
+    }
+
+    // Timer logic
+    const countdown = setInterval(() => {
+      time--;
+      let minutes = Math.floor(time / 60);
+      let seconds = time % 60;
+      timerDisplay.textContent = `Time Left: ${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+
+      if (time <= 0) {
+        clearInterval(countdown);
+        timerDisplay.textContent = "Time Left: 00:00";
+        timeUpMsg.style.display = "block";
+        questionContainer.innerHTML = "";
+      }
+    }, 1000);
+
+    showQuestion();
+  </script>
+</body>
+</html>
