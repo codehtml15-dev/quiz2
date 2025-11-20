@@ -46,8 +46,6 @@
 
     nav .logo img {
       width: 40px;
-      height: 40px;
-      object-fit: contain;
     }
 
     nav .logo h3 {
@@ -75,18 +73,16 @@
 
     /* MAIN QUIZ SECTION */
     .container {
-      display: flex;
-      justify-content: space-between;
-      
-      align-items: flex-start;
       width: 90%;
-      max-width: 1200px;
-      gap: 30px;
+      max-width: 800px;
       margin-top: 120px;
+      display: flex;
+      height: 600px;
+      justify-content: center;
     }
 
     .quiz-box {
-      flex: 1;
+      width: 100%;
       background: rgba(240, 248, 255, 0.9);
       border-radius: 15px;
       padding: 40px;
@@ -96,8 +92,7 @@
     }
 
     .quiz-box h1 {
-      color: #1e3a8a;
-      font-size: 2.3rem;
+      font-size: 2.7rem;
       margin-bottom: 15px;
       font-weight: 700;
     }
@@ -111,38 +106,40 @@
       box-shadow: 0 0 10px rgba(37, 99, 235, 0.4);
     }
 
+    /* QUESTION BIGGER */
     .question {
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin-bottom: 35px;
+      font-size: 2.0rem; 
+      font-weight: 700;
+      margin-bottom: 40px;
       color: #1e3a8a;
     }
 
+    /* OPTIONS BIGGER */
     .options {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 25px;
       justify-content: center;
-      margin-bottom: 30px;
+      margin-bottom: 50px;
     }
 
     .option-btn {
       background: #e0ebff;
       border: 2px solid #2563eb;
       color: #1e3a8a;
-      font-size: 1.1rem;
-      padding: 14px;
+      font-size: 1.4rem;   /* increased */
+      padding: 18px;
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.3s ease;
       text-align: center;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .option-btn:hover {
       background: #2563eb;
       color: white;
-      transform: scale(1.05);
+      transform: scale(1.06);
     }
 
     .option-btn.correct {
@@ -157,63 +154,41 @@
       border-color: #dc2626;
     }
 
-    /* SIDE PANEL */
-    .nav-panel {
-      background: rgba(237, 245, 252, 0.9);
-      border-left: 3px solid rgba(30, 58, 138, 0.5);
-      border-radius: 12px;
-      padding: 25px;
-      width: 180px;
+    /* Bottom Buttons */
+    .bottom-buttons {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .nav-panel h3 {
-      color: #1e3a8a;
-      margin-bottom: 10px;
-      font-size: 1.2rem;
-      font-weight: 700;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 70px;   /* pushed more down */
     }
 
     .nav-btn {
-      background: linear-gradient(135deg, #3b82f6, #2563eb);
-      border: none;
-      color: #fff;
+      padding: 13px 30px;
+      font-size: 1.2rem;
       font-weight: 600;
-      font-size: 1rem;
-      padding: 10px 20px;
+      border: none;
       border-radius: 10px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: 0.3s ease;
       text-decoration: none;
-      text-align: center;
-      width: 100%;
-      box-shadow: 0 0 12px rgba(37, 99, 235, 0.3);
+      color: white;
     }
 
-    .nav-btn:hover {
-      background: linear-gradient(135deg, #2563eb, #1e3a8a);
-      transform: scale(1.05);
+    .back-btn {
+      background: #6b7280;
+    }
+    .back-btn:hover {
+      background: #4b5563;
     }
 
-    .nav-btn.active {
-      background: linear-gradient(135deg, #1e3a8a, #172554);
-      color: #a5b4fc;
-      transform: scale(1.02);
+    .next-btn {
+      background: #2563eb;
+    }
+    .next-btn:hover {
+      background: #1d4ed8;
     }
 
-    @media (max-width: 900px) {
-      .container {
-        flex-direction: column;
-        align-items: center;
-      }
-      .nav-panel {
-        width: 90%;
-        margin-top: 20px;
-      }
+    @media (max-width: 700px) {
       .options {
         grid-template-columns: 1fr;
       }
@@ -238,21 +213,21 @@
     <div class="quiz-box">
       <h1>Option Round</h1>
       <div class="divider"></div>
-      <div class="question">Q4: Which country hosted the 2016 Summer Olympics?</div>
+      <div class="question"> Which country hosted the 2016 Summer Olympics?</div>
+
       <div class="options">
         <div class="option-btn" data-correct="false">A. China</div>
         <div class="option-btn" data-correct="true">B. Brazil</div>
         <div class="option-btn" data-correct="false">C. Japan</div>
         <div class="option-btn" data-correct="false">D. USA</div>
       </div>
-    </div>
 
-    <div class="nav-panel">
-      <h3>Select Question</h3>
-      <a href="optionroundq1.html" class="nav-btn">Q1</a>
-      <a href="optionroundq2.html" class="nav-btn">Q2</a>
-      <a href="optionroundq3.html" class="nav-btn">Q3</a>
-      <a href="optionroundq4.html" class="nav-btn active">Q4</a>
+      <!-- BOTTOM BUTTONS -->
+      <div class="bottom-buttons">
+        <a href="optionroundq3.html" class="nav-btn back-btn">← Back</a>
+        <a href="optionroundq5.html" class="nav-btn next-btn">Next Round →</a>
+      </div>
+
     </div>
   </div>
 
@@ -265,14 +240,11 @@
         if (answered) return;
         answered = true;
 
-        const correct = document.querySelector('.option-btn[data-correct="true"]');
         options.forEach(o => {
-          o.classList.remove("correct", "wrong");
           if (o.dataset.correct === "true") o.classList.add("correct");
           else o.classList.add("wrong");
         });
 
-        // Optional: highlight user's choice border
         option.style.borderWidth = "3px";
         option.style.borderColor = "#fff";
       });
