@@ -39,16 +39,39 @@
     .page {
       width:92%;
       max-width:1200px;
-      margin-top:140px;      /* REDUCED from 110px */
+      margin-top:140px;
       background: rgba(250,251,255,0.95);
       border-radius:14px;
       box-shadow:0 12px 40px rgba(0,0,0,0.35);
       overflow:hidden;
-      height: 550px;
+      padding-bottom:45px;
     }
 
+    .bottom-nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 25px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.4s ease;
+      color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn.back { background: linear-gradient(135deg,#3b82f6,#2563eb); }
+    .btn.next { background: linear-gradient(135deg,#2563eb,#1e40af); }
+    .btn:hover { transform: scale(1.05); }
+
     .header {
-      padding:22px 32px;   /* slightly reduced */
+      padding:22px 32px;
       text-align:center;
       border-bottom:1px solid rgba(30,58,138,0.06);
     }
@@ -78,8 +101,8 @@
     }
 
     .panel {
-      padding:24px;               /* REDUCED from 36px */
-      min-height:380px;           /* slightly smaller */
+      padding:24px;
+      min-height:380px;
       display:flex;
       flex-direction:column;
       align-items:center;
@@ -96,7 +119,6 @@
       gap:16px;
       width:100%;
       max-width:520px;
-      margin-top:4px;
     }
 
     .qs-btn {
@@ -109,20 +131,15 @@
       font-size:1.6rem;
       font-weight:800;
       display:flex;
-      align-items:center;
       justify-content:center;
       cursor:pointer;
       border:1px solid rgba(255,255,255,0.12);
       box-shadow: 0 8px 20px rgba(16,24,40,0.14);
-      transition: transform 200ms ease, box-shadow 200ms ease;
+      transition: .2s ease;
     }
-    .qs-btn:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(16,24,40,0.2); }
+    .qs-btn:hover { transform: translateY(-4px); }
 
-    .badge { width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.12); color:#fff; font-weight:800; }
-
-    /* --------------------------- */
-    /* OVERLAY                     */
-    /* --------------------------- */
+    /* ----------- OVERLAY ----------- */
     #overlay {
       position:fixed; inset:0;
       display:none;
@@ -140,23 +157,38 @@
       border-radius:12px;
       position:relative;
       text-align:center;
-      box-shadow:0 10px 30px rgba(0,0,0,0.36);
     }
 
-    #overlay h1 { font-size:1.5rem; color:#0a2a66; margin-bottom:10px; }
-    #overlay .question-area { min-height:100px; margin-bottom:10px; }
+    /* QN BIGGER */
+    #overlay .question-area { 
+      font-size:1.5rem; 
+      font-weight:700;
+      margin-bottom:15px;
+      color:#0a2a66;
+    }
 
     .media-wrap {
-      margin:6px 0;      /* REDUCED from 12px */
+      margin-top:0px; /* Bring media higher */
       display:flex;
       flex-direction:column;
       align-items:center;
-      gap:10px;
+      gap:8px;
     }
 
+    /* Smaller + higher videos */
     #overlay video, #overlay audio {
-      max-width:92%;
+      max-width:48%;    /* MUCH smaller */
+      margin-top:5px;   /* Keep it higher */
       border-radius:10px;
+    }
+
+    /* Answer BIG */
+    #overlay-answer {
+      display:none;
+      font-size:1.8rem;
+      font-weight:800;
+      color:#0b3a78;
+      margin-top:18px;
     }
 
     .overlay-btn {
@@ -166,21 +198,12 @@
       border-radius:10px;
       font-weight:700;
       color:#fff;
-      border:none;
       cursor:pointer;
+      border:none;
     }
     .overlay-back { left:12px; background:#6b7280; }
     .overlay-answer { right:12px; background:#2563eb; }
 
-    @media (max-width:900px){
-      .split { grid-template-columns:1fr; }
-      .split::before { display:none; }
-      .panel { min-height:360px; }
-    }
-    @media (max-width:520px){
-      .qs-btn { font-size:1.3rem; padding:12px 18px; }
-      .header h1 { font-size:1.9rem; }
-    }
   </style>
 </head>
 
@@ -206,22 +229,24 @@
   </div>
 
   <div class="split">
-
-    <!-- SIGHT -->
     <section class="panel">
       <div class="panel-title"><div class="badge">👁️</div><h2>Sight</h2></div>
       <div class="panel-sub">Video Questions (4)</div>
       <div class="buttons" id="sightButtons"></div>
     </section>
 
-    <!-- SOUND -->
     <section class="panel">
       <div class="panel-title"><div class="badge">🔊</div><h2>Sound</h2></div>
       <div class="panel-sub">Audio Questions (4)</div>
       <div class="buttons" id="soundButtons"></div>
     </section>
-
   </div>
+
+  <div class="bottom-nav">
+    <a href="round3rules.html" class="btn back">← Back</a>
+    <a href="round5rules.html" class="btn next">Next Round →</a>
+  </div>
+
 </div>
 
 <!-- OVERLAY -->
@@ -230,7 +255,7 @@
     <h1 id="overlay-title"></h1>
     <div class="question-area" id="overlay-question"></div>
     <div class="media-wrap" id="overlay-media"></div>
-    <div id="overlay-answer" style="display:none; font-weight:600;"></div>
+    <div id="overlay-answer"></div>
 
     <button class="overlay-btn overlay-back" onclick="closeOverlay()">← Back</button>
     <button class="overlay-btn overlay-answer" onclick="showAnswer()">Show Answer</button>
@@ -238,17 +263,15 @@
 </div>
 
 <script>
-  /* VIDEO QUESTIONS */
   const sightQuestions = [
-    { q:"Visual 1: Identify this landmark.", a:"Example Landmark", videoSrc:"viudeo.mp4" },
-    { q:"Visual 2: Name this object.", a:"Example Object", videoSrc:"viudeo.mp4" },
-    { q:"Visual 3: What art style is this?", a:"Example Art Style", videoSrc:"viudeo.mp4" },
-    { q:"Visual 4: Identify this logo.", a:"Example Brand", videoSrc:"viudeo.mp4" }
+    { q:"BRBR PATAPIM TUNG TUNG TUNG SAHUR TRALALELO TRALALA BOMBARDILO CROCODILO BOMBOMBINI GUSINI BALLERINA CAPPUCINO ", a:"Example Landmark", videoSrc:"viudeo.mp4" },
+    { q:"Visual 2: Name this object.", a:"Example Object", videoSrc:"video.mp4" },
+    { q:"Visual 3: What art style is this?", a:"Example Art Style", videoSrc:"video.mp4" },
+    { q:"Visual 4: Identify this logo.", a:"Example Brand", videoSrc:"video.mp4" }
   ];
 
-  /* AUDIO QUESTIONS */
   const soundQuestions = [
-    { q:"Audio 1: Which instrument is playing?", a:"Example Instrument", audioSrc:"audio1.mp3" },
+    { q:"Audio 1: Which instrument is playing?", a:"Example Instrument", audioSrc:"reliable-safe-327618.mp3" },
     { q:"Audio 2: Name the song.", a:"Example Song", audioSrc:"audio2.mp3" },
     { q:"Audio 3: Identify the animal sound.", a:"Example Animal", audioSrc:"audio3.mp3" },
     { q:"Audio 4: Identify the language.", a:"Example Language", audioSrc:"audio4.mp3" }
@@ -288,7 +311,7 @@
       v.src = item.videoSrc;
       v.controls = true;
       overlayMedia.appendChild(v);
-      setTimeout(()=>v.play().catch(()=>{}), 250);
+      setTimeout(()=>v.play().catch(()=>{}), 200);
     }
 
     if(item.audioSrc){
@@ -296,7 +319,7 @@
       a.src = item.audioSrc;
       a.controls = true;
       overlayMedia.appendChild(a);
-      setTimeout(()=>a.play().catch(()=>{}), 250);
+      setTimeout(()=>a.play().catch(()=>{}), 200);
     }
 
     overlay.style.display = "flex";
