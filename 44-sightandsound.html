@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sight and Sound Round</title>
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:"Poppins","Segoe UI",Arial,sans-serif; }
+    body {
+      background-color: #385a85;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 30px 30px;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      padding-bottom:40px;
+    }
+
+    nav {
+      width:100%;
+      background: rgba(30,58,138,0.95);
+      padding:12px 40px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:fixed;
+      top:0; left:0; z-index:1000;
+    }
+    nav .logo { display:flex; gap:10px; align-items:center; }
+    nav .logo img { width:40px; }
+    nav .logo h3 { color:#fff; font-size:1.1rem; font-weight:600; }
+    nav ul { list-style:none; display:flex; gap:20px; }
+    nav ul a { color:#fff; text-decoration:none; font-weight:500; }
+
+    .page {
+      width:92%;
+      max-width:1200px;
+      margin-top:140px;
+      background: rgba(250,251,255,0.95);
+      border-radius:14px;
+      box-shadow:0 12px 40px rgba(0,0,0,0.35);
+      overflow:hidden;
+      padding-bottom:45px;
+    }
+
+    .bottom-nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 25px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.4s ease;
+      color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn.back { background: linear-gradient(135deg,#3b82f6,#2563eb); }
+    .btn.next { background: linear-gradient(135deg,#2563eb,#1e40af); }
+    .btn:hover { transform: scale(1.05); }
+
+    .header {
+      padding:22px 32px;
+      text-align:center;
+      border-bottom:1px solid rgba(30,58,138,0.06);
+    }
+    .header h1 {
+      font-size:2.4rem;
+      color:#FFD700;
+      font-weight:800;
+      letter-spacing:2px;
+      margin-bottom:6px;
+    }
+    .header p { color:#1e3a8a; font-weight:600; }
+
+    .split {
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      position:relative;
+    }
+    .split::before{
+      content:'';
+      position:absolute;
+      left:50%;
+      top:12px;
+      bottom:12px;
+      width:2px;
+      transform:translateX(-50%);
+      background: rgba(30,58,138,0.12);
+    }
+
+    .panel {
+      padding:24px;
+      min-height:380px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:16px;
+    }
+
+    .panel-title { display:flex; align-items:center; gap:10px; }
+    .panel-title h2 { font-size:1.5rem; color:#0b3a78; font-weight:800; }
+    .panel-sub { color:#2563eb; font-weight:700; margin-bottom:6px; }
+
+    .buttons {
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:16px;
+      width:100%;
+      max-width:520px;
+    }
+
+    .qs-btn {
+      width:86%;
+      min-width:180px;
+      padding:16px 24px;
+      border-radius:12px;
+      background: linear-gradient(135deg,#3b82f6,#2563eb);
+      color:#fff;
+      font-size:1.6rem;
+      font-weight:800;
+      display:flex;
+      justify-content:center;
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 8px 20px rgba(16,24,40,0.14);
+      transition: .2s ease;
+    }
+    .qs-btn:hover { transform: translateY(-4px); }
+
+    /* ----------- OVERLAY ----------- */
+    #overlay {
+      position:fixed; inset:0;
+      display:none;
+      background:rgba(0,0,0,0.65);
+      z-index:2000;
+      justify-content:center;
+      align-items:center;
+    }
+
+    #overlay-content {
+      width:94%;
+      max-width:900px;
+      background:rgba(225,240,255,0.96);
+      padding:20px;
+      border-radius:12px;
+      position:relative;
+      text-align:center;
+    }
+
+    /* QN BIGGER */
+    #overlay .question-area { 
+      font-size:1.5rem; 
+      font-weight:700;
+      margin-bottom:15px;
+      color:#0a2a66;
+    }
+
+    .media-wrap {
+      margin-top:0px; /* Bring media higher */
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:8px;
+    }
+
+    /* Smaller + higher videos */
+    #overlay video, #overlay audio {
+      max-width:48%;    /* MUCH smaller */
+      margin-top:5px;   /* Keep it higher */
+      border-radius:10px;
+    }
+
+    /* Answer BIG */
+    #overlay-answer {
+      display:none;
+      font-size:1.8rem;
+      font-weight:800;
+      color:#0b3a78;
+      margin-top:18px;
+    }
+
+    .overlay-btn {
+      position:absolute;
+      bottom:12px;
+      padding:10px 14px;
+      border-radius:10px;
+      font-weight:700;
+      color:#fff;
+      cursor:pointer;
+      border:none;
+    }
+    .overlay-back { left:12px; background:#6b7280; }
+    .overlay-answer { right:12px; background:#2563eb; }
+
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">
+    <img src="logo.png" alt="logo"/>
+    <h3>Fluorescent Secondary</h3>
+  </div>
+  <ul>
+    <li><a href="1-1main.html">Home</a></li>
+    <li><a href="#">Quiz</a></li>
+    <li><a href="#">Results</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <div class="header">
+    <h1>Sight and Sound Round</h1>
+    <p>Left: Sight (Videos) — Right: Sound (Audio)</p>
+  </div>
+
+  <div class="split">
+    <section class="panel">
+      <div class="panel-title"><div class="badge">👁️</div><h2>Sight</h2></div>
+      <div class="panel-sub">Video Questions (4)</div>
+      <div class="buttons" id="sightButtons"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title"><div class="badge">🔊</div><h2>Sound</h2></div>
+      <div class="panel-sub">Audio Questions (4)</div>
+      <div class="buttons" id="soundButtons"></div>
+    </section>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="43-round9rules.html" class="btn back">← Back</a>
+    <a href="45-round10rules.html" class="btn next">Next Round →</a>
+  </div>
+
+</div>
+
+<!-- OVERLAY -->
+<div id="overlay">
+  <div id="overlay-content">
+    <h1 id="overlay-title"></h1>
+    <div class="question-area" id="overlay-question"></div>
+    <div class="media-wrap" id="overlay-media"></div>
+    <div id="overlay-answer"></div>
+
+    <button class="overlay-btn overlay-back" onclick="closeOverlay()">← Back</button>
+    <button class="overlay-btn overlay-answer" onclick="showAnswer()">Show Answer</button>
+  </div>
+</div>
+
+<script>
+  const sightQuestions = [
+    { q:"BRBR PATAPIM TUNG TUNG TUNG SAHUR TRALALELO TRALALA BOMBARDILO CROCODILO BOMBOMBINI GUSINI BALLERINA CAPPUCINO ", a:"Example Landmark", videoSrc:"viudeo.mp4" },
+    { q:"Visual 2: Name this object.", a:"Example Object", videoSrc:"video.mp4" },
+    { q:"Visual 3: What art style is this?", a:"Example Art Style", videoSrc:"video.mp4" },
+    { q:"Visual 4: Identify this logo.", a:"Example Brand", videoSrc:"video.mp4" }
+  ];
+
+  const soundQuestions = [
+    { q:"Audio 1: Which instrument is playing?", a:"Example Instrument", audioSrc:"reliable-safe-327618.mp3" },
+    { q:"Audio 2: Name the song.", a:"Example Song", audioSrc:"audio2.mp3" },
+    { q:"Audio 3: Identify the animal sound.", a:"Example Animal", audioSrc:"audio3.mp3" },
+    { q:"Audio 4: Identify the language.", a:"Example Language", audioSrc:"audio4.mp3" }
+  ];
+
+  const sightContainer = document.getElementById("sightButtons");
+  const soundContainer = document.getElementById("soundButtons");
+  const overlay = document.getElementById("overlay");
+  const overlayTitle = document.getElementById("overlay-title");
+  const overlayQuestion = document.getElementById("overlay-question");
+  const overlayMedia = document.getElementById("overlay-media");
+  const overlayAnswer = document.getElementById("overlay-answer");
+
+  function createButtons(container, list, type){
+    list.forEach((item, idx)=>{
+      const btn = document.createElement("button");
+      btn.className = "qs-btn";
+      btn.textContent = "Q" + (idx+1);
+      btn.onclick = ()=> openOverlay(type, idx+1, item);
+      container.appendChild(btn);
+    });
+  }
+
+  createButtons(sightContainer, sightQuestions, "Sight");
+  createButtons(soundContainer, soundQuestions, "Sound");
+
+  function openOverlay(type, num, item){
+    overlayTitle.textContent = `${type} Q${num}`;
+    overlayQuestion.textContent = item.q;
+    overlayAnswer.style.display = "none";
+    overlayAnswer.textContent = item.a;
+
+    overlayMedia.innerHTML = "";
+
+    if(item.videoSrc){
+      const v = document.createElement("video");
+      v.src = item.videoSrc;
+      v.controls = true;
+      overlayMedia.appendChild(v);
+      setTimeout(()=>v.play().catch(()=>{}), 200);
+    }
+
+    if(item.audioSrc){
+      const a = document.createElement("audio");
+      a.src = item.audioSrc;
+      a.controls = true;
+      overlayMedia.appendChild(a);
+      setTimeout(()=>a.play().catch(()=>{}), 200);
+    }
+
+    overlay.style.display = "flex";
+  }
+
+  function closeOverlay(){
+    overlayMedia.querySelectorAll("video, audio").forEach(m=>{
+      try{ m.pause(); }catch(e){}
+    });
+    overlay.style.display = "none";
+  }
+
+  function showAnswer(){
+    overlayAnswer.style.display = "block";
+  }
+
+  document.addEventListener("keydown", e=>{
+    if(e.key === "Escape") closeOverlay();
+  });
+</script>
+
+</body>
+</html>
