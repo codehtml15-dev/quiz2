@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Option Round - Q4</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #385a85;
+      background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 30px 30px;
+      min-height: 100vh;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* NAVIGATION BAR */
+    nav {
+      width: 100%;
+      background: rgba(30, 58, 138, 0.95);
+      padding: 12px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    nav .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    nav .logo img {
+      width: 40px;
+    }
+
+    nav .logo h3 {
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #c7d2fe;
+    }
+
+    /* MAIN QUIZ SECTION */
+    .container {
+      width: 90%;
+      max-width: 800px;
+      margin-top: 120px;
+      display: flex;
+      height: 600px;
+      justify-content: center;
+    }
+
+    .quiz-box {
+      width: 100%;
+      background: rgba(240, 248, 255, 0.9);
+      border-radius: 15px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      color: #1e3a8a;
+    }
+
+    .quiz-box h1 {
+      font-size: 2.7rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .divider {
+      height: 4px;
+      width: 70%;
+      background: #2563eb;
+      margin: 0 auto 30px;
+      border-radius: 3px;
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.4);
+    }
+
+    /* QUESTION BIGGER */
+    .question {
+      font-size: 2.0rem; 
+      font-weight: 700;
+      margin-bottom: 40px;
+      color: #1e3a8a;
+    }
+
+    /* OPTIONS BIGGER */
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      justify-content: center;
+      margin-bottom: 50px;
+    }
+
+    .option-btn {
+      background: #e0ebff;
+      border: 2px solid #2563eb;
+      color: #1e3a8a;
+      font-size: 1.4rem;   /* increased */
+      padding: 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .option-btn:hover {
+      background: #2563eb;
+      color: white;
+      transform: scale(1.06);
+    }
+
+    .option-btn.correct {
+      background: #22c55e !important;
+      color: white !important;
+      border-color: #16a34a;
+    }
+
+    .option-btn.wrong {
+      background: #ef4444 !important;
+      color: white !important;
+      border-color: #dc2626;
+    }
+
+    /* Bottom Buttons */
+    .bottom-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 70px;   /* pushed more down */
+    }
+
+    .nav-btn {
+      padding: 13px 30px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      text-decoration: none;
+      color: white;
+    }
+
+    .back-btn {
+      background: #6b7280;
+    }
+    .back-btn:hover {
+      background: #4b5563;
+    }
+
+    .next-btn {
+      background: #2563eb;
+    }
+    .next-btn:hover {
+      background: #1d4ed8;
+    }
+
+    @media (max-width: 700px) {
+      .options {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <img src="logo.png" alt="Logo" />
+      <h3>Fluorescent Secondary</h3>
+    </div>
+    <ul>
+      <li><a href="1-1main.html">Home</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+      <li><a href="#">Results</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="quiz-box">
+      <h1>Option Round</h1>
+      <div class="divider"></div>
+      <div class="question"> Which country hosted the 2016 Summer Olympics?</div>
+
+      <div class="options">
+        <div class="option-btn" data-correct="false">A. China</div>
+        <div class="option-btn" data-correct="true">B. Brazil</div>
+        <div class="option-btn" data-correct="false">C. Japan</div>
+        <div class="option-btn" data-correct="false">D. USA</div>
+      </div>
+
+      <!-- BOTTOM BUTTONS -->
+      <div class="bottom-buttons">
+        <a href="11-3option.html" class="nav-btn back-btn">← Back</a>
+   
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const options = document.querySelectorAll(".option-btn");
+    let answered = false;
+
+    options.forEach(option => {
+      option.addEventListener("click", () => {
+        if (answered) return;
+        answered = true;
+
+        options.forEach(o => {
+          if (o.dataset.correct === "true") o.classList.add("correct");
+          else o.classList.add("wrong");
+        });
+
+        option.style.borderWidth = "3px";
+        option.style.borderColor = "#fff";
+      });
+    });
+  </script>
+</body>
+</html>

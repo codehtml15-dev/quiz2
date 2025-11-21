@@ -70,7 +70,7 @@
     /* GRID OF ROUND BUTTONS */
     .container {
       display: grid;
-      grid-template-columns: repeat(3, 1fr); /* 3 buttons per row */
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
       width: 100%;
       max-width: 700px;
@@ -114,15 +114,14 @@
     /* RESPONSIVE GRID */
     @media(max-width:900px){ .container{ grid-template-columns: repeat(2,1fr); } }
     @media(max-width:500px){ .container{ grid-template-columns: 1fr; } }
-
   </style>
 </head>
 <body>
   <nav>
     <a href="1-1main.html" class="logo" style="text-decoration:none; color:inherit;">
-  <img src="logo.png" alt="School Logo" />
-  <h3>Fluorescent Secondary</h3>
-</a>
+      <img src="logo.png" alt="School Logo" />
+      <h3>Fluorescent Secondary</h3>
+    </a>
 
     <ul>
       <li><a href="1-1main.html">Home</a></li>
@@ -141,37 +140,44 @@
 
     <div class="container">
       <a href="8-round1rules.html" class="question-btn" data-id="round1">Round 1</a>
-      <a href="roundrules2.html" class="question-btn" data-id="round2">Round 2</a>
-      <a href="roundrules3.html" class="question-btn" data-id="round3">Round 3</a>
-      <a href="roundrules4.html" class="question-btn" data-id="round4">Round 4</a>
-      <a href="roundrules5.html" class="question-btn" data-id="round5">Round 5</a>
-      <a href="roundrules6.html" class="question-btn" data-id="round6">Round 6</a>
-      <a href="roundrules7.html" class="question-btn" data-id="round7">Round 7</a>
-      <a href="roundrules8.html" class="question-btn" data-id="round8">Round 8</a>
-      <a href="roundrules9.html" class="question-btn" data-id="round9">Round 9</a>
-      <a href="roundrules10.html" class="question-btn" data-id="round10">Round 10</a>
+      <a href="10-round2rules.html" class="question-btn" data-id="round2">Round 2</a>
+      <a href="12-round3rules.html" class="question-btn" data-id="round3">Round 3</a>
+      <a href="14-round4rules.html" class="question-btn" data-id="round4">Round 4</a>
+      <a href="16-round5rules.html" class="question-btn" data-id="round5">Round 5</a>
+      <a href="18-round6rules.html" class="question-btn" data-id="round6">Round 6</a>
+      <a href="29-round7rules.html" class="question-btn" data-id="round7">Round 7</a>
+      <a href="38-round8rules.html" class="question-btn" data-id="round8">Round 8</a>
+      <a href="43-round9rules.html" class="question-btn" data-id="round9">Round 9</a>
+      <a href="45-round10rules.html" class="question-btn" data-id="round10">Round 10</a>
     </div>
 
     <a href="2-contestants.html" class="btn back">← Back</a>
   </div>
 
+  <!-- 🔥 SESSION STORAGE SCRIPT -->
   <script>
     const buttons = document.querySelectorAll(".question-btn");
-    const selectedRounds = JSON.parse(localStorage.getItem("selectedRounds")) || [];
+
+    // Retrieve stored rounds for this session
+    const selectedRounds = JSON.parse(sessionStorage.getItem("selectedRounds")) || [];
 
     buttons.forEach(btn => {
+      // Apply active state if stored
       if (selectedRounds.includes(btn.dataset.id)) {
         btn.classList.add("active");
       }
 
       btn.addEventListener("click", () => {
         btn.classList.add("active");
+
+        // Save to session storage
         if (!selectedRounds.includes(btn.dataset.id)) {
           selectedRounds.push(btn.dataset.id);
-          localStorage.setItem("selectedRounds", JSON.stringify(selectedRounds));
+          sessionStorage.setItem("selectedRounds", JSON.stringify(selectedRounds));
         }
       });
     });
   </script>
+
 </body>
 </html>
