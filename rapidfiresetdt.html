@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fluorescent Secondary</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;font-family:"Poppins","Segoe UI",Arial,sans-serif}
+    body{background:#385a85;color:#0a2a66;min-height:100vh;font-size:22px}
+
+    nav{width:100%;background:rgba(30,58,138,0.95);padding:20px 36px;display:flex;justify-content:space-between;align-items:center;position:fixed;top:0;left:0;z-index:1000}
+    nav .logo{display:flex;gap:12px;align-items:center}
+    nav .logo img{width:60px;height:auto}
+    nav .logo h3{color:#fff;font-size:1.2rem}
+    nav ul{display:flex;gap:24px;list-style:none}
+    nav ul a{color:#fff;text-decoration:none;font-size:1.4rem}
+
+    .main-wrapper{
+        width:92%;
+        max-width:1100px;
+        margin:140px auto;
+        padding:36px;
+        background:rgba(250,251,255,0.96);
+        border-radius:12px;
+        box-shadow:0 12px 40px rgba(0,0,0,0.25);
+        height:550px;
+        display:flex;
+        align-items:center;      /* vertical center */
+        justify-content:center;  /* horizontal center */
+        transition:height 0.4s ease;
+    }
+
+    .quiz-area{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      width:100%;
+    }
+
+    #timer{
+      font-size:2.2rem;
+      font-weight:800;
+      color:#1e3a8a;
+      margin-bottom:30px;
+    }
+
+    #question{
+      background:#eef3ff;
+      padding:28px;
+      border-radius:12px;
+      min-height:120px;
+      font-size:1.6rem;
+      font-weight:700;
+      color:#0a2a66;
+      box-shadow:0 6px 18px rgba(0,0,0,0.06);
+      margin-bottom:30px;
+      width:80%;
+    }
+
+    .controls{
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+
+    button.btn{
+      padding:16px 28px;
+      border:none;
+      border-radius:10px;
+      background:linear-gradient(135deg,#2563eb,#1e40af);
+      color:#fff;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 8px 18px rgba(0,0,0,0.15);
+      font-size:1.4rem;
+    }
+    button.btn.secondary{background:linear-gradient(135deg,#3b82f6,#2563eb)}
+
+    .answers{margin-top:24px;width:100%}
+    .qa{background:#fff;padding:20px;border-radius:10px;margin-bottom:14px;box-shadow:0 6px 16px rgba(0,0,0,0.06)}
+    .qa h4{margin-bottom:8px;color:#0a2a66;font-size:1.4rem}
+    .qa p{margin:0;color:#123;font-size:1.2rem}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><img src="logo.png" alt="logo"><h3>Fluorescent Secondary</h3></div>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Quiz</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="main-wrapper" id="mainWrapper">
+  <div class="quiz-area">
+    <div id="timer">01:00</div>
+    <div id="question">Press <strong>Start Round</strong> to begin.</div>
+
+    <div class="controls">
+      <button id="startBtn" class="btn">Start Round</button>
+      <button id="nextBtn" class="btn" style="display:none">Next Question</button>
+      <button id="showAnswersBtn" class="btn secondary" style="display:none">Show Answers</button>
+    </div>
+
+    <div class="answers" id="answersList" style="display:none"></div>
+  </div>
+</div>
+
+<script>
+const qa = [
+  {q:"What is the capital of Nepal?", a:"Kathmandu"},
+  {q:"Which planet is known as the Red Planet?", a:"Mars"},
+  {q:"Who wrote Ramayana?", a:"Valmiki"},
+  {q:"What is H2O?", a:"Water"},
+  {q:"Fastest land animal?", a:"Cheetah"},
+  {q:"Largest ocean in the world?", a:"Pacific Ocean"},
+  {q:"Who invented the light bulb?", a:"Thomas Edison"},
+  {q:"Which gas do plants release?", a:"Oxygen"},
+  {q:"Smallest continent?", a:"Australia"},
+  {q:"National bird of Nepal?", a:"Danphe"}
+];
+
+let current = -1;
+let timerId = null;
+let timeLeft = 60;
+
+const questionBox = document.getElementById('question');
+const timerBox = document.getElementById('timer');
+const startBtn = document.getElementById('startBtn');
+const nextBtn = document.getElementById('nextBtn');
+const showAnswersBtn = document.getElementById('showAnswersBtn');
+const answersList = document.getElementById('answersList');
+const mainWrapper = document.getElementById('mainWrapper');
+
+function renderQuestion(){
+  if(current < 0) return;
+  const item = qa[current];
+  questionBox.innerHTML = `<strong>Q${current+1}.</strong> ${item.q}`;
+  nextBtn.style.display = (current < qa.length-1) ? 'inline-block' : 'none';
+  showAnswersBtn.style.display = (current === qa.length-1) ? 'inline-block' : 'none';
+}
+
+function startTimer(){
+  clearInterval(timerId);
+  timeLeft = 60;
+  timerBox.textContent = formatTime(timeLeft);
+  timerId = setInterval(()=>{
+    timeLeft--;
+    timerBox.textContent = formatTime(timeLeft);
+    if(timeLeft <= 0){
+      clearInterval(timerId);
+      timerBox.textContent = '00:00';
+      if(current === qa.length-1){ showAnswersBtn.style.display = 'inline-block'; }
+    }
+  },1000);
+}
+
+function formatTime(s){
+  const m = String(Math.floor(s/60)).padStart(2,'0');
+  const sec = String(s%60).padStart(2,'0');
+  return `${m}:${sec}`;
+}
+
+startBtn.addEventListener('click', ()=>{
+  startBtn.style.display = 'none';
+  current = 0;
+  renderQuestion();
+  startTimer();
+});
+
+nextBtn.addEventListener('click', ()=>{
+  if(current < qa.length-1){
+    current++;
+    renderQuestion();
+  }
+});
+
+showAnswersBtn.addEventListener('click', ()=>{
+  clearInterval(timerId);
+  answersList.innerHTML = '';
+  qa.forEach((it, idx)=>{
+    const div = document.createElement('div');
+    div.className = 'qa';
+    div.innerHTML = `<h4>Q${idx+1}: ${it.q}</h4><p><strong>Answer:</strong> ${it.a}</p>`;
+    answersList.appendChild(div);
+  });
+  answersList.style.display = 'block';
+  questionBox.style.display = 'none';
+  document.querySelector('.controls').style.display = 'none';
+  timerBox.style.display = 'none';
+  mainWrapper.style.height = 'auto';
+});
+</script>
+
+</body>
+</html>
